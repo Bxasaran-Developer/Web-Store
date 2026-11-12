@@ -14,5 +14,13 @@
     "surum": "Son Sürüm",
     "ikon": "https://bxasaran-developer.github.io/Web-Store/basaran_logo.png",
     "apk_url": "MT_Manager.apk"
+  },
+  {
+    "id": 2,
+    "ad": "MT Manager",
+    "aciklama": "Gelişmiş dosya yöneticisi ve APK düzenleme aracı.",
+    "surum": "Son Sürüm",
+    "ikon": "https://bxasaran-developer.github.io/Web-Store/basaran_logo.png",
+    "apk_url": "MT_Manager.apk"
   }
 ]
