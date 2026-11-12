@@ -200,11 +200,9 @@
             width: 56px;
             height: 56px;
             border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            object-fit: cover;
             border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #121212;
         }
 
         .app-info {
@@ -419,9 +417,7 @@
             container.innerHTML = apps.map(app => `
                 <a href="${app.downloadUrl}" class="modern-app-card">
                     <div class="app-left">
-                        <div class="app-icon" style="background: ${app.iconBg}">
-                            ${app.iconSvg}
-                        </div>
+                        <img src="${app.iconUrl}" alt="${app.name}" class="app-icon" onerror="this.src='basaran_logo.png'">
                         <div class="app-info">
                             <span class="app-name">${app.name}</span>
                             <div class="app-meta">
