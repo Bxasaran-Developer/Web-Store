@@ -22,24 +22,37 @@
         .surum { font-size: 11px; color: #4CAF50; margin-top: 4px; display: block; }
         .indir-btn { background-color: #4CAF50; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; font-size: 14px; }
         .indir-btn:hover { background-color: #45a049; }
+        .hata { color: #ff5252; text-align: center; background: #1e1e1e; padding: 15px; border-radius: 8px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <h1>Bxasaran App Store</h1>
-    <div class="uygulama-listesi" id="liste">Yükleniyor...</div>
+    <div class="uygulama-listesi" id="liste">Uygulamalar yükleniyor...</div>
 
     <script>
-        fetch('apps.json')
-            .then(res => res.json())
+        // Önbellek sorununu aşmak için rastgele bir parametre ekleyelim
+        fetch('apps.json?v=' + new Date().getTime())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("JSON dosyası okunamadı! (HTTP " + res.status + ")");
+                }
+                return res.json();
+            })
             .then(data => {
                 const liste = document.getElementById('liste');
                 liste.innerHTML = '';
+                
+                if (data.length === 0) {
+                    liste.innerHTML = '<div class="hata">Henüz mağazada uygulama yok.</div>';
+                    return;
+                }
+
                 data.forEach(app => {
                     liste.innerHTML += `
                         <div class="kart">
                             <div class="bilgi">
-                                <img src="${app.ikon}" class="ikon" alt="ikon">
+                                <img src="${app.ikon}" class="ikon" alt="ikon" onerror="this.src='https://cdn-icons-png.flaticon.com/512/226/226770.png'">
                                 <div class="detay">
                                     <h3>${app.ad}</h3>
                                     <p>${app.aciklama}</p>
@@ -52,7 +65,12 @@
                 });
             })
             .catch(err => {
-                document.getElementById('liste').innerText = 'Uygulamalar yüklenemedi.';
+                document.getElementById('liste').innerHTML = `
+                    <div class="hata">
+                        <b>Hata Oluştu:</b> ${err.message}<br><br>
+                        Lütfen <b>apps.json</b> dosyanızın tırnak ve süslü parantez kurallarına uygun olduğundan emin olun.
+                    </div>
+                `;
             });
     </script>
 
