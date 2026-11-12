@@ -7,12 +7,12 @@
     "ikon": "https://bxasaran-developer.github.io/Web-Store/basaran_logo.png",
     "apk_url": "BASARAN-TV_16.0.apk"
   },
-{
-    "id": 1,
+  {
+    "id": 2,
     "ad": "MT Manager",
-    "aciklama": "Bxasaran tarafından geliştirilen özel TV uygulaması.",
-    "surum": "13.0",
-    "ikon": "https://bxasaran-developer.github.io/Web-Store/basaran_logo.png",
-    "apk_url": "MT_Manager.apk"
+    "aciklama": "Gelişmiş dosya yöneticisi ve APK düzenleme aracı.",
+    "surum": "Son Sürüm",
+    "ikon": "https://cdn-icons-png.flaticon.com/512/226/226770.png",
+    "apk_url": "mt_manager.apk"
   }
 ]
