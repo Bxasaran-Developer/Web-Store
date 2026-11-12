@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bxasaran Uygulama Mağazası</title>
-    <script>
-        // Sadece Android tarayıcılardan girildiğinde uygulamaya yönlendirmeyi dener
-        if (/Android/i.test(navigator.userAgent) && !window.location.search.includes("app=1")) {
-            window.location.href = "bxasaran://store";
-        }
-    </script>
     <style>
         body { font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; margin: 0; padding: 20px; }
         h1 { text-align: center; color: #4CAF50; }
@@ -31,11 +25,10 @@
     <div class="uygulama-listesi" id="liste">Uygulamalar yükleniyor...</div>
 
     <script>
-        // Önbellek sorununu aşmak için rastgele bir parametre ekleyelim
-        fetch('apps.json?v=' + new Date().getTime())
+        fetch('apps.json')
             .then(res => {
                 if (!res.ok) {
-                    throw new Error("JSON dosyası okunamadı! (HTTP " + res.status + ")");
+                    throw new Error("apps.json dosyası okunamadı.");
                 }
                 return res.json();
             })
@@ -43,11 +36,6 @@
                 const liste = document.getElementById('liste');
                 liste.innerHTML = '';
                 
-                if (data.length === 0) {
-                    liste.innerHTML = '<div class="hata">Henüz mağazada uygulama yok.</div>';
-                    return;
-                }
-
                 data.forEach(app => {
                     liste.innerHTML += `
                         <div class="kart">
@@ -67,8 +55,7 @@
             .catch(err => {
                 document.getElementById('liste').innerHTML = `
                     <div class="hata">
-                        <b>Hata Oluştu:</b> ${err.message}<br><br>
-                        Lütfen <b>apps.json</b> dosyanızın tırnak ve süslü parantez kurallarına uygun olduğundan emin olun.
+                        <b>Yükleme Hatası:</b> ${err.message}<br>Lütfen apps.json dosyanızı kontrol edin.
                     </div>
                 `;
             });
