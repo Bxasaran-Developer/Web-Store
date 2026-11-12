@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bxasaran Uygulama Mağazası</title>
+    <script>
+        // Sadece Android tarayıcılardan girildiğinde uygulamaya yönlendirmeyi dener
+        if (/Android/i.test(navigator.userAgent) && !window.location.search.includes("app=1")) {
+            window.location.href = "bxasaran://store";
+        }
+    </script>
     <style>
         body { font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; margin: 0; padding: 20px; }
         h1 { text-align: center; color: #4CAF50; }
