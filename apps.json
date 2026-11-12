@@ -1,16 +1,16 @@
 [
   {
-    "name": "BASARAN TV",
+    "name": "Yakında Yayında",
     "category": "Tv & Medya",
     "version": "16.0",
-    "downloadUrl": "BASARAN-TV_16.0.apk",
+    "downloadUrl": "basaran_logo.png",
     "iconUrl": "basaran_logo.png"
   },
   {
-    "name": "MT Manager",
+    "name": "Yakında Yayında",
     "category": "Dosya Yöneticisi",
     "version": "Son Sürüm",
-    "downloadUrl": "MT_Manager.apk",
-    "iconUrl": "basaran1_logo.png"
+    "downloadUrl": "basaran_logo.png",
+    "iconUrl": "basaran_logo.png"
   }
 ]
