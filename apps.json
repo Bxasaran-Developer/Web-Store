@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "ad": "Örnek Uygulamam",
+    "aciklama": "Bxasaran tarafından geliştirilen özel Android uygulaması.",
+    "surum": "1.0",
+    "ikon": "https://cdn-icons-png.flaticon.com/512/226/226770.png",
+    "apk_url": "uygulama1.apk"
+  }
+]
