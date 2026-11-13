@@ -22,7 +22,6 @@
             overflow: hidden;
         }
 
-        /* Özel Modern Kaydırma Çubuğu */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -46,12 +45,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 38px 18px 24px;
+            padding: 40px 18px 32px;
             overflow: hidden;
             transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
         }
 
-        /* Arka Plan Neon Aura Efektleri */
         #splashScreen::before,
         #splashScreen::after {
             content: '';
@@ -91,7 +89,7 @@
 
         .splash-header {
             text-align: center;
-            margin-top: 8px;
+            margin-top: 10px;
         }
 
         .brand-neon-title {
@@ -180,81 +178,34 @@
             transform: translateX(4px);
         }
 
-        /* --- YENİLENEN ULTRA MODERN VE AKICI ÇEKMECE BUTONU --- */
+        /* BUTON SİLİNDİ: Sadece Şık Metin ve Altında Ok Tasarımı */
         .bottom-drawer-handle {
             width: 100%;
             max-width: 440px;
-            padding: 18px 22px;
-            border-radius: 24px;
-            background: linear-gradient(145deg, rgba(28, 24, 42, 0.85), rgba(12, 10, 18, 0.95));
-            border: 1px solid rgba(232, 121, 249, 0.45);
-            box-shadow: 
-                0 0 32px rgba(168, 85, 247, 0.3), 
-                0 8px 32px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                inset 0 0 16px rgba(232, 121, 249, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            padding: 14px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: grab;
             touch-action: none;
             user-select: none;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.25s ease;
         }
 
-        .bottom-drawer-handle::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(232, 121, 249, 0.25), transparent 70%);
-            pointer-events: none;
-        }
-
-        .bottom-drawer-handle:active {
-            cursor: grabbing;
-            border-color: #f0abfc;
-            box-shadow: 
-                0 0 45px rgba(232, 121, 249, 0.5), 
-                0 10px 35px rgba(0, 0, 0, 0.7),
-                inset 0 0 24px rgba(232, 121, 249, 0.3);
-            transform: scale(0.98);
-        }
-
-        .drawer-pill-bar {
-            width: 46px;
-            height: 5px;
-            border-radius: 12px;
-            background: linear-gradient(90deg, #c084fc, #e879f9, #38ef7d);
-            background-size: 200% auto;
-            animation: neonBarFlow 4s linear infinite;
-            box-shadow: 0 0 12px #e879f9;
-        }
-
-        @keyframes neonBarFlow {
-            to { background-position: 200% center; }
-        }
-
-        .drawer-title {
-            font-size: 0.94rem;
-            font-weight: 700;
-            color: #fdf4ff;
+        .bottom-drawer-text {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #d8b4fe;
             letter-spacing: 0.4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-shadow: 0 0 10px rgba(232, 121, 249, 0.6);
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
         }
 
-        .drawer-title svg {
-            width: 18px;
-            height: 18px;
-            stroke: #f0abfc;
-            filter: drop-shadow(0 0 6px #e879f9);
+        .bottom-drawer-arrow {
+            width: 20px;
+            height: 20px;
+            stroke: #e879f9;
+            filter: drop-shadow(0 0 8px #c084fc);
             animation: bounceUp 1.8s infinite;
         }
 
@@ -280,7 +231,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 16px 16px 50px;
+            padding: 24px 16px 50px;
             z-index: 100;
         }
 
@@ -292,83 +243,16 @@
             gap: 16px;
         }
 
-        .top-pull-zone {
-            position: relative;
-            z-index: 50;
+        /* Search Bar ve Yanındaki Şık Neon Çekmece Butonu */
+        .search-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             width: 100%;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .neon-pull-btn {
-            --pull-progress: 0;
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #241b35, #0e0c14);
-            border: 2px solid rgba(192, 132, 252, calc(0.35 + var(--pull-progress) * 0.65));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: grab;
-            touch-action: none;
-            user-select: none;
-            position: relative;
-            box-shadow: 
-                0 6px 20px rgba(0, 0, 0, 0.6),
-                0 0 calc(10px + var(--pull-progress) * 35px) rgba(192, 132, 252, calc(0.35 + var(--pull-progress) * 0.65)),
-                inset 0 0 calc(var(--pull-progress) * 22px) rgba(232, 121, 249, calc(0.15 + var(--pull-progress) * 0.85));
-            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s ease;
-        }
-
-        .neon-pull-btn.dragging {
-            transition: none;
-            cursor: grabbing;
-        }
-
-        .neon-pull-btn::before {
-            content: '';
-            position: absolute;
-            inset: -7px;
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                #a855f7,
-                #e879f9,
-                #38ef7d,
-                #a855f7 calc(var(--pull-progress) * 360deg),
-                transparent 0deg
-            );
-            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4.5px), #fff calc(100% - 4px));
-            mask: radial-gradient(farthest-side, transparent calc(100% - 4.5px), #fff calc(100% - 4px));
-            pointer-events: none;
-            filter: drop-shadow(0 0 10px rgba(232, 121, 249, 0.9));
-        }
-
-        .neon-pull-btn::after {
-            content: '';
-            position: absolute;
-            inset: -7px;
-            border-radius: 50%;
-            border: 1px solid rgba(192, 132, 252, 0.22);
-            pointer-events: none;
-        }
-
-        .neon-pull-btn svg {
-            width: 24px;
-            height: 24px;
-            stroke: #f3e8ff;
-            transform: rotate(90deg);
-            filter: drop-shadow(0 0 6px rgba(232, 121, 249, 0.8));
-            transition: transform 0.2s ease;
         }
 
         .search-container {
-            position: relative;
-            z-index: 10;
+            flex: 1;
             display: flex;
             align-items: center;
             background: rgba(18, 18, 25, 0.85);
@@ -405,6 +289,39 @@
 
         .search-input::placeholder {
             color: #71717a;
+        }
+
+        /* Search Bar'ın Yanına Konan Şık Neon Buton */
+        .neon-side-btn {
+            --pull-progress: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            background: radial-gradient(circle at 30% 30%, #241b35, #0e0c14);
+            border: 1.5px solid rgba(192, 132, 252, calc(0.35 + var(--pull-progress) * 0.65));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.5),
+                0 0 calc(8px + var(--pull-progress) * 25px) rgba(168, 85, 247, calc(0.3 + var(--pull-progress) * 0.7));
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .neon-side-btn:active {
+            transform: scale(0.94);
+        }
+
+        .neon-side-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: #f3e8ff;
+            transform: rotate(180deg); /* Menüye dönüş oku */
+            filter: drop-shadow(0 0 6px rgba(232, 121, 249, 0.8));
         }
 
         .section-header {
@@ -658,35 +575,32 @@
             </button>
         </div>
 
-        <!-- YENİLENEN ULTRA ŞIK NEON ÇEKMECE ALANI -->
+        <!-- Sadece Metin ve Altında Ok Tasarımı (Buton silindi) -->
         <div class="bottom-drawer-handle" id="bottomDrawerHandle">
-            <div class="drawer-pill-bar"></div>
-            <div class="drawer-title">
-                <span>Uygulamalar için yukarı kaydırın</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="18 15 12 9 6 15"></polyline>
-                </svg>
-            </div>
+            <div class="bottom-drawer-text">Uygulamalar için yukarı kaydırın</div>
+            <svg class="bottom-drawer-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
         </div>
     </div>
 
     <!-- 2. EKRAN: BAĞIMSIZ MAĞAZA EKRANI -->
     <div id="storeScreen">
         <div class="container">
-            <div class="top-pull-zone">
-                <div class="neon-pull-btn" id="pullHandleBtn" title="Menüye dönmek için aşağı çekin">
+            <!-- Search Bar ve Yanında Şık Neon Menü Butonu -->
+            <div class="search-row">
+                <div class="search-container">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Uygulama ara..." onkeyup="filterApps()">
+                </div>
+                <div class="neon-side-btn" id="sideMenuBtn" onclick="returnToSplash()" title="Ana Menüye Dön">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
+                        <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </div>
-            </div>
-
-            <div class="search-container">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <input type="text" id="searchInput" class="search-input" placeholder="Uygulama ara..." onkeyup="filterApps()">
             </div>
 
             <div class="section-header">
@@ -713,7 +627,6 @@
         const splash = document.getElementById('splashScreen');
         const storeScreen = document.getElementById('storeScreen');
         const bottomDrawer = document.getElementById('bottomDrawerHandle');
-        const pullBtn = document.getElementById('pullHandleBtn');
 
         // Sayfa açıldığında hafızadaki durumu kontrol et
         window.addEventListener('DOMContentLoaded', () => {
@@ -739,7 +652,7 @@
             }, 300);
         }
 
-        // 1. Ekranda alt çekmece yukarı kaydırılınca mağazayı aç
+        // 1. Ekranda alt kısmı yukarı kaydırınca mağazayı aç
         let drawerStartY = 0;
         let isDrawerDragging = false;
 
@@ -786,77 +699,6 @@
             const deltaY = drawerStartY - e.clientY;
             if (deltaY > 40) {
                 enterStore();
-            }
-        });
-
-        // 2. Ekranda neonPullBtn aşağı çekilince 1. menüye dön
-        let isPulling = false;
-        let pullStartY = 0;
-        const maxPullDistance = 100;
-
-        function startPull(clientY) {
-            isPulling = true;
-            pullStartY = clientY;
-            pullBtn.classList.add('dragging');
-        }
-
-        function movePull(clientY) {
-            if (!isPulling) return;
-            const deltaY = Math.max(0, clientY - pullStartY);
-            const progress = Math.min(1, deltaY / maxPullDistance);
-            const visualTranslate = Math.min(deltaY * 0.18, 18);
-
-            pullBtn.style.setProperty('--pull-progress', progress.toFixed(3));
-            pullBtn.style.transform = `translateY(${visualTranslate}px) scale(${1 + progress * 0.14})`;
-        }
-
-        function endPull(clientY) {
-            if (!isPulling) return;
-            isPulling = false;
-            pullBtn.classList.remove('dragging');
-
-            const deltaY = Math.max(0, clientY - pullStartY);
-            const progress = Math.min(1, deltaY / maxPullDistance);
-
-            pullBtn.style.setProperty('--pull-progress', '0');
-            pullBtn.style.transform = 'translateY(0) scale(1)';
-
-            if (progress >= 0.8) {
-                returnToSplash();
-            }
-        }
-
-        pullBtn.addEventListener('touchstart', e => {
-            e.stopPropagation();
-            startPull(e.touches[0].clientY);
-        }, { passive: true });
-
-        window.addEventListener('touchmove', e => {
-            if (isPulling) {
-                movePull(e.touches[0].clientY);
-            }
-        }, { passive: true });
-
-        window.addEventListener('touchend', e => {
-            if (isPulling) {
-                endPull(e.changedTouches[0].clientY);
-            }
-        });
-
-        pullBtn.addEventListener('mousedown', e => {
-            e.preventDefault();
-            startPull(e.clientY);
-        });
-
-        window.addEventListener('mousemove', e => {
-            if (isPulling) {
-                movePull(e.clientY);
-            }
-        });
-
-        window.addEventListener('mouseup', e => {
-            if (isPulling) {
-                endPull(e.clientY);
             }
         });
 
@@ -966,7 +808,7 @@
                 Reklam kişiselleştirme tercihlerinizi doğrudan cihaz ayarlarınızdan yönetebilirsiniz: Android cihazınızda <strong>Ayarlar > Google > Reklamlar</strong> bölümüne giderek <em>"Reklam Kişiselleştirmeyi Devre Dışı Bırak"</em> seçeneğini etkinleştirebilirsiniz.
 
                 <h4>14. Ücretsiz Hizmet ve Ücret Politikası</h4>
-                <strong>Bxasaran Store</strong> bünyesindeki hiçbir uygulamada kullanıcılarımızdan para, bağış, abonelik ücreti veya uygulama içi satın alma talep edilmez. Tüm uygulamalarımız tamamen ücretsizdir ve tek gelir kaynağımız uygulama içi standart reklamlardır. Bu nedenle herhangi bir ödeme veya para iadesi süreci bulunmamaktadır. Adımıza sizden ücret talep eden kişi veya kaynaklara kesinlikle itibar etmeyiniz.
+                <strong>Bxasaran Store</strong> bünyesindeki hiçbir uygulamada kullanıcılarımızdan para, bağış, abonelik ücreti veya uygulama içi satın alma talep edilmez. Tüm uygulamalarımız tamamen ücretsizdir ve tek gelir kaynağımız uygulama içi reklamlardır. Bu nedenle herhangi bir ödeme veya para iadesi süreci bulunmamaktadır. Adımıza sizden ücret talep eden kişi veya kaynaklara kesinlikle itibar etmeyiniz.
 
                 <h4>15. Bize Ulaşın</h4>
                 Gizlilik Politikamız, uygulamalarımız veya güvenliğiniz hakkında herhangi bir sorunuz ya da öneriniz varsa, resmi web sitemiz <strong>bxasaran-developer.github.io/Web-Store/</strong> üzerindeki resmi kanallarımız aracılığıyla bizimle her zaman iletişime geçebilirsiniz.`
