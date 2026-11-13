@@ -289,7 +289,7 @@
             color: #71717a;
         }
 
-        /* --- 1 SANİYE BASILI TUTMA EFEKTİNE SAHİP ULTRA ŞIK NEON BUTON --- */
+        /* --- 0.5 SANİYE BASILI TUTMA EFEKTİNE SAHİP ULTRA ŞIK NEON BUTON --- */
         .neon-side-btn {
             --hold-progress: 0;
             width: 50px;
@@ -647,8 +647,8 @@
                     </svg>
                     <input type="text" id="searchInput" class="search-input" placeholder="Uygulama ara..." onkeyup="filterApps()">
                 </div>
-                <!-- 1 Saniye Basılı Tutma + Çift Tıklama Uyarı Özellikli Buton -->
-                <div class="neon-side-btn" id="sideMenuBtn" title="Ana Menüye Dönmek için 1 saniye basılı tutun">
+                <!-- 0.5 Saniye Basılı Tutma Özellikli Buton -->
+                <div class="neon-side-btn" id="sideMenuBtn" title="Ana Menüye Dönmek için 0.5 saniye basılı tutun">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
@@ -667,7 +667,7 @@
     </div>
 
     <!-- ÇİFT TIKLAMA BİLGİLENDİRME TOAST BİLDİRİMİ -->
-    <div class="toast-notification" id="toastMsg">Ana menüye dönmek için butona 1 saniye basılı tutun!</div>
+    <div class="toast-notification" id="toastMsg">Ana menüye dönmek için butona basılı tutun!</div>
 
     <!-- MODAL PENCERE -->
     <div class="modal-overlay" id="infoModal" onclick="closeModalOnBg(event)">
@@ -709,11 +709,11 @@
             }, 300);
         }
 
-        // --- 1 SANİYE BASILI TUTMA VE ÇİFT TIKLAMA UYARI MANTIĞI ---
+        // --- 0.5 SANİYE BASILI TUTMA VE ÇİFT TIKLAMA UYARI MANTIĞI ---
         let holdTimer = null;
         let animationFrame = null;
         let startTime = null;
-        const holdDuration = 1000; // 1 Saniye
+        const holdDuration = 500; // 0.5 Saniye (500 ms)
 
         let lastClickTime = 0;
         let toastTimeout = null;
@@ -730,7 +730,6 @@
             const currentTime = new Date().getTime();
             const timeDiff = currentTime - lastClickTime;
 
-            // Eğer 400ms içinde tekrar tıklandıysa (Çift Tıklama)
             if (timeDiff < 400 && timeDiff > 0) {
                 showToast();
                 lastClickTime = 0;
@@ -754,7 +753,7 @@
                 if (progress < 1) {
                     animationFrame = requestAnimationFrame(updateProgress);
                 } else {
-                    // 1 saniye basılı tutuldu -> 1. menüye dön ve sıfırla
+                    // 0.5 saniye doldu -> 1. menüye dön
                     cancelHolding();
                     returnToSplash();
                 }
@@ -769,7 +768,6 @@
             sideMenuBtn.style.setProperty('--hold-progress', '0');
         }
 
-        // Dokunmatik ve Fare olay bağlamaları
         sideMenuBtn.addEventListener('touchstart', startHolding, { passive: false });
         sideMenuBtn.addEventListener('touchend', cancelHolding);
         sideMenuBtn.addEventListener('touchcancel', cancelHolding);
