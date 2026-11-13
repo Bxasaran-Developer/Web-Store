@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* --- KARŞILAMA (SPLASH) EKRANI & POLİTİKALAR --- */
+        /* --- İLK AÇILIŞ (SPLASH) EKRANI & GEZEGEN LOGO --- */
         #splashScreen {
             position: fixed;
             inset: 0;
@@ -38,7 +38,8 @@
             align-items: center;
             justify-content: space-between;
             padding: 25px 16px;
-            transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.7s ease;
+            /* Akıcı yukarı kaydırma geçiş animasyonu */
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
         }
 
         #splashScreen.slide-up {
@@ -71,7 +72,7 @@
             max-width: 480px;
         }
 
-        /* DÖNEN LOGO VE GEZEGEN EFEKTİ */
+        /* Dönen Gezegen Logo Alanı */
         .splash-globe-container {
             width: 150px;
             height: 150px;
@@ -110,7 +111,7 @@
             line-height: 1.4;
         }
 
-        /* İlk ekrandaki politika butonları */
+        /* Politika Butonları */
         .splash-nav {
             display: flex;
             flex-direction: column;
@@ -382,27 +383,33 @@
             padding: 20px 0;
         }
 
+        /* --- MODAL PENCERE ANİMASYONLARI (FADE & ZOOM) --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(6px);
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             z-index: 1000;
-            animation: fadeIn 0.2s ease;
+            
+            /* Başlangıçta gizli ve tıklanamaz */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
         .modal-overlay.active {
-            display: flex;
+            opacity: 1;
+            visibility: visible;
         }
 
         .modal-box {
             background: #111115;
             border: 1px solid #c882d6;
-            box-shadow: 0 0 25px rgba(200, 130, 214, 0.35);
+            box-shadow: 0 0 30px rgba(200, 130, 214, 0.3);
             border-radius: 18px;
             max-width: 460px;
             width: 100%;
@@ -410,6 +417,14 @@
             color: #e4e4e7;
             max-height: 85vh;
             overflow-y: auto;
+            
+            /* Kutu açılma animasyon efekti (küçükten normal boyuta) */
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1) translateY(0);
         }
 
         .modal-title {
@@ -455,11 +470,11 @@
             font-weight: 700;
             cursor: pointer;
             font-size: 0.9rem;
+            transition: opacity 0.2s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .close-btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -554,7 +569,7 @@
         </div>
     </div>
 
-    <!-- MODAL PENCERE YAPISI -->
+    <!-- ANİMASYONLU MODAL PENCERE YAPISI -->
     <div class="modal-overlay" id="infoModal" onclick="closeModalOnBg(event)">
         <div class="modal-box">
             <h3 class="modal-title" id="modalTitle">Başlık</h3>
