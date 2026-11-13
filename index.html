@@ -14,7 +14,7 @@
         }
 
         html, body {
-            background-color: #050507;
+            background-color: #030712;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             width: 100%;
@@ -29,17 +29,17 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(192, 132, 252, 0.35);
+            background: rgba(59, 130, 246, 0.4);
             border-radius: 10px;
         }
 
         /* =========================================================
-           1. EKRAN: NEON SPLASH & POLİTİKALAR
+           1. EKRAN: UZAY MAVİSİ SPLASH & POLİTİKALAR
            ========================================================= */
         #splashScreen {
             position: fixed;
             inset: 0;
-            background: #050507;
+            background: linear-gradient(135deg, #030712 0%, #0b1329 100%);
             z-index: 900;
             display: flex;
             flex-direction: column;
@@ -54,31 +54,31 @@
         #splashScreen::after {
             content: '';
             position: absolute;
-            width: 360px;
-            height: 360px;
+            width: 380px;
+            height: 380px;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(110px);
             z-index: -1;
             pointer-events: none;
-            animation: neonDrift 9s ease-in-out infinite alternate;
+            animation: blueDrift 10s ease-in-out infinite alternate;
         }
 
         #splashScreen::before {
-            background: rgba(168, 85, 247, 0.32);
+            background: rgba(29, 78, 216, 0.35);
             top: -100px;
             left: -80px;
         }
 
         #splashScreen::after {
-            background: rgba(56, 239, 125, 0.18);
+            background: rgba(14, 165, 233, 0.22);
             bottom: -100px;
             right: -80px;
-            animation-delay: -4.5s;
+            animation-delay: -5s;
         }
 
-        @keyframes neonDrift {
+        @keyframes blueDrift {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 50px) scale(1.18); }
+            100% { transform: translate(45px, 55px) scale(1.2); }
         }
 
         #splashScreen.slide-up {
@@ -97,12 +97,12 @@
             font-size: 1.75rem;
             font-weight: 800;
             letter-spacing: 1.2px;
-            background: linear-gradient(90deg, #f0abfc, #a855f7, #38ef7d, #f0abfc);
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #38bdf8, #60a5fa);
             background-size: 250% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: neonTextFlow 5s linear infinite;
-            filter: drop-shadow(0 0 22px rgba(168, 85, 247, 0.55));
+            filter: drop-shadow(0 0 22px rgba(59, 130, 246, 0.6));
         }
 
         @keyframes neonTextFlow {
@@ -111,7 +111,7 @@
 
         .splash-subtitle {
             font-size: 0.88rem;
-            color: #a1a1aa;
+            color: #94a3b8;
             margin-top: 8px;
             max-width: 280px;
             line-height: 1.45;
@@ -127,11 +127,11 @@
 
         .splash-pill {
             position: relative;
-            background: rgba(18, 18, 25, 0.65);
-            border: 1px solid rgba(192, 132, 252, 0.25);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 58, 138, 0.4));
+            border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 18px;
             padding: 16px 18px;
-            color: #f4f4f5;
+            color: #f8fafc;
             font-family: 'Inter', sans-serif;
             font-size: 0.92rem;
             font-weight: 600;
@@ -142,7 +142,7 @@
             transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 24px rgba(3, 7, 18, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .pill-left {
@@ -154,27 +154,27 @@
         .splash-pill svg.pill-icon {
             width: 21px;
             height: 21px;
-            stroke: #c084fc;
-            filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.7));
+            stroke: #60a5fa;
+            filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.7));
             flex-shrink: 0;
         }
 
         .splash-pill svg.pill-arrow {
             width: 16px;
             height: 16px;
-            stroke: #71717a;
+            stroke: #64748b;
             transition: transform 0.25s ease, stroke 0.25s ease;
         }
 
         .splash-pill:hover, .splash-pill:active {
-            background: rgba(168, 85, 247, 0.16);
-            border-color: #d8b4fe;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.5), rgba(37, 99, 235, 0.3));
+            border-color: #60a5fa;
             transform: translateY(-2px);
-            box-shadow: 0 10px 28px rgba(168, 85, 247, 0.3);
+            box-shadow: 0 10px 28px rgba(37, 99, 235, 0.35);
         }
 
         .splash-pill:hover svg.pill-arrow {
-            stroke: #f0abfc;
+            stroke: #93c5fd;
             transform: translateX(4px);
         }
 
@@ -195,16 +195,16 @@
         .bottom-drawer-text {
             font-size: 0.92rem;
             font-weight: 600;
-            color: #d8b4fe;
+            color: #93c5fd;
             letter-spacing: 0.4px;
-            text-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
         }
 
         .bottom-drawer-arrow {
             width: 20px;
             height: 20px;
-            stroke: #e879f9;
-            filter: drop-shadow(0 0 8px #c084fc);
+            stroke: #60a5fa;
+            filter: drop-shadow(0 0 8px #3b82f6);
             animation: bounceUp 1.8s infinite;
         }
 
@@ -215,7 +215,7 @@
         }
 
         /* =========================================================
-           2. EKRAN: BAĞIMSIZ MAĞAZA EKRANI
+           2. EKRAN: UZAY MAVİSİ BAĞIMSIZ MAĞAZA EKRANI
            ========================================================= */
         #storeScreen {
             position: fixed;
@@ -223,10 +223,10 @@
             width: 100%;
             height: 100%;
             overflow-y: auto;
-            background: #050507;
+            background: linear-gradient(135deg, #030712 0%, #090f22 100%);
             background-image: 
-                radial-gradient(circle at 50% -5%, rgba(168, 85, 247, 0.2), transparent 50%),
-                radial-gradient(circle at 90% 60%, rgba(56, 239, 125, 0.06), transparent 45%);
+                radial-gradient(circle at 50% -5%, rgba(37, 99, 235, 0.25), transparent 50%),
+                radial-gradient(circle at 90% 60%, rgba(14, 165, 233, 0.1), transparent 45%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -253,25 +253,25 @@
             flex: 1;
             display: flex;
             align-items: center;
-            background: rgba(18, 18, 25, 0.85);
-            border: 1px solid rgba(192, 132, 252, 0.28);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 58, 138, 0.3));
+            border: 1px solid rgba(59, 130, 246, 0.35);
             border-radius: 18px;
             padding: 13px 16px;
             gap: 12px;
             backdrop-filter: blur(14px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 24px rgba(3, 7, 18, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
             transition: border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .search-container:focus-within {
-            border-color: #e879f9;
-            box-shadow: 0 0 24px rgba(168, 85, 247, 0.3);
+            border-color: #60a5fa;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.35);
         }
 
         .search-container svg {
             width: 19px;
             height: 19px;
-            stroke: #c084fc;
+            stroke: #60a5fa;
             flex-shrink: 0;
         }
 
@@ -286,17 +286,17 @@
         }
 
         .search-input::placeholder {
-            color: #71717a;
+            color: #64748b;
         }
 
-        /* --- 0.5 SANİYE BASILI TUTMA EFEKTİNE SAHİP ULTRA ŞIK NEON BUTON --- */
+        /* --- 0.5 SANİYE BASILI TUTMA EFEKTİNE SAHİP UZAY MAVİSİ BUTON --- */
         .neon-side-btn {
             --hold-progress: 0;
             width: 50px;
             height: 50px;
             border-radius: 16px;
-            background: radial-gradient(circle at 30% 30%, #2b1f3d, #0e0c14);
-            border: 2px solid rgba(192, 132, 252, calc(0.4 + var(--hold-progress) * 0.6));
+            background: radial-gradient(circle at 30% 30%, #1e3a8a, #0b1329);
+            border: 2px solid rgba(96, 165, 250, calc(0.4 + var(--hold-progress) * 0.6));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -306,8 +306,8 @@
             position: relative;
             overflow: hidden;
             box-shadow: 
-                0 6px 20px rgba(0, 0, 0, 0.5),
-                0 0 calc(10px + var(--hold-progress) * 30px) rgba(168, 85, 247, calc(0.4 + var(--hold-progress) * 0.6));
+                0 6px 20px rgba(3, 7, 18, 0.6),
+                0 0 calc(10px + var(--hold-progress) * 35px) rgba(59, 130, 246, calc(0.4 + var(--hold-progress) * 0.6));
             transition: transform 0.2s ease;
         }
 
@@ -321,20 +321,20 @@
             inset: -4px;
             border-radius: 18px;
             background: conic-gradient(
-                #e879f9 calc(var(--hold-progress) * 360deg),
+                #38bdf8 calc(var(--hold-progress) * 360deg),
                 transparent 0deg
             );
             -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff calc(100% - 3.5px));
             mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff calc(100% - 3.5px));
             pointer-events: none;
-            filter: drop-shadow(0 0 8px #c084fc);
+            filter: drop-shadow(0 0 8px #3b82f6);
         }
 
         .neon-side-btn::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(168, 85, 247, calc(var(--hold-progress) * 0.35));
+            background: rgba(37, 99, 235, calc(var(--hold-progress) * 0.4));
             pointer-events: none;
             transition: background 0.1s ease;
         }
@@ -342,28 +342,28 @@
         .neon-side-btn svg {
             width: 22px;
             height: 22px;
-            stroke: #f3e8ff;
+            stroke: #f8fafc;
             transform: rotate(180deg);
-            filter: drop-shadow(0 0 6px rgba(232, 121, 249, 0.9));
+            filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.9));
             position: relative;
             z-index: 2;
         }
 
-        /* --- ÇİFT TIKLAMA BİLGİLENDİRME TOAST BİLDİRİMİ --- */
+        /* --- TOAST BİLDİRİMİ --- */
         .toast-notification {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(80px);
-            background: rgba(18, 14, 26, 0.92);
-            border: 1px solid rgba(232, 121, 249, 0.6);
-            color: #f3e8ff;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(96, 165, 250, 0.6);
+            color: #f8fafc;
             padding: 12px 22px;
             border-radius: 16px;
             font-size: 0.85rem;
             font-weight: 600;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4), 0 0 20px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4), 0 0 20px rgba(3, 7, 18, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             z-index: 3000;
@@ -387,14 +387,14 @@
         .section-title {
             font-size: 0.98rem;
             font-weight: 700;
-            color: #f4f4f5;
+            color: #f1f5f9;
         }
 
         .app-count {
             font-size: 0.75rem;
-            color: #d8b4fe;
-            background: rgba(168, 85, 247, 0.14);
-            border: 1px solid rgba(192, 132, 252, 0.25);
+            color: #93c5fd;
+            background: rgba(30, 58, 138, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             padding: 4px 11px;
             border-radius: 20px;
             font-weight: 600;
@@ -410,22 +410,22 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(18, 18, 25, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 58, 138, 0.25));
+            border: 1px solid rgba(59, 130, 246, 0.25);
             border-radius: 20px;
             padding: 14px;
             text-decoration: none;
             color: #ffffff;
             transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
             backdrop-filter: blur(14px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 24px rgba(3, 7, 18, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
         .modern-app-card:hover {
-            background: rgba(26, 26, 36, 0.92);
-            border-color: rgba(192, 132, 252, 0.5);
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(37, 99, 235, 0.3));
+            border-color: rgba(96, 165, 250, 0.6);
             transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 16px rgba(168, 85, 247, 0.18);
+            box-shadow: 0 12px 30px rgba(3, 7, 18, 0.6), 0 0 20px rgba(59, 130, 246, 0.25);
         }
 
         .app-left {
@@ -439,8 +439,8 @@
             height: 56px;
             border-radius: 16px;
             object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: #121212;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: #0b1329;
         }
 
         .app-info {
@@ -460,13 +460,13 @@
             align-items: center;
             gap: 8px;
             font-size: 0.74rem;
-            color: #a1a1aa;
+            color: #94a3b8;
         }
 
         .tag-free {
-            color: #4ade80;
-            background: rgba(74, 222, 128, 0.12);
-            border: 1px solid rgba(74, 222, 128, 0.25);
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.25);
             padding: 2px 7px;
             border-radius: 6px;
             font-weight: 600;
@@ -474,18 +474,18 @@
         }
 
         .download-pill {
-            background: linear-gradient(135deg, #9333ea, #c084fc);
-            color: #09090b;
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            color: #ffffff;
             font-weight: 700;
             font-size: 0.8rem;
             padding: 9px 17px;
             border-radius: 13px;
-            box-shadow: 0 4px 16px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
         }
 
         .no-result {
             text-align: center;
-            color: #71717a;
+            color: #64748b;
             font-size: 0.86rem;
             padding: 28px 0;
         }
@@ -494,7 +494,7 @@
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.84);
+            background: rgba(3, 7, 18, 0.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: flex;
@@ -513,14 +513,14 @@
         }
 
         .modal-box {
-            background: #0f0f14;
-            border: 1px solid rgba(192, 132, 252, 0.45);
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.35);
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            border: 1px solid rgba(96, 165, 250, 0.5);
+            box-shadow: 0 0 45px rgba(37, 99, 235, 0.4);
             border-radius: 22px;
             max-width: 460px;
             width: 100%;
             padding: 24px;
-            color: #e4e4e7;
+            color: #f1f5f9;
             max-height: 85vh;
             overflow-y: auto;
             transform: scale(0.88) translateY(18px);
@@ -534,16 +534,16 @@
         .modal-title {
             font-size: 1.12rem;
             font-weight: 700;
-            color: #e9d5ff;
+            color: #93c5fd;
             margin-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 10px;
         }
 
         .modal-content {
             font-size: 0.88rem;
             line-height: 1.6;
-            color: #d4d4d8;
+            color: #cbd5e1;
         }
 
         .modal-content strong {
@@ -551,7 +551,7 @@
         }
 
         .modal-content h4 {
-            color: #d8b4fe;
+            color: #93c5fd;
             margin-top: 14px;
             margin-bottom: 4px;
             font-size: 0.94rem;
@@ -569,18 +569,18 @@
             padding: 12px;
             border-radius: 13px;
             border: none;
-            background: linear-gradient(90deg, #9333ea, #c084fc);
-            color: #000;
+            background: linear-gradient(90deg, #1d4ed8, #3b82f6);
+            color: #ffffff;
             font-weight: 700;
             cursor: pointer;
             font-size: 0.9rem;
-            box-shadow: 0 4px 16px rgba(168, 85, 247, 0.35);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. EKRAN: SPLASH & POLİTİKALAR -->
+    <!-- 1. EKRAN: UZAY MAVİSİ SPLASH & POLİTİKALAR -->
     <div id="splashScreen">
         <div class="splash-header">
             <div class="brand-neon-title">Bxasaran Store</div>
@@ -636,7 +636,7 @@
         </div>
     </div>
 
-    <!-- 2. EKRAN: BAĞIMSIZ MAĞAZA EKRANI -->
+    <!-- 2. EKRAN: UZAY MAVİSİ BAĞIMSIZ MAĞAZA EKRANI -->
     <div id="storeScreen">
         <div class="container">
             <div class="search-row">
@@ -647,7 +647,7 @@
                     </svg>
                     <input type="text" id="searchInput" class="search-input" placeholder="Uygulama ara..." onkeyup="filterApps()">
                 </div>
-                <!-- 0.5 Saniye Basılı Tutma Özellikli Buton -->
+                <!-- 0.5 Saniye Basılı Tutma Özellikli Uzay Mavisi Buton -->
                 <div class="neon-side-btn" id="sideMenuBtn" title="Ana Menüye Dönmek için 0.5 saniye basılı tutun">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -666,7 +666,7 @@
         </div>
     </div>
 
-    <!-- ÇİFT TIKLAMA BİLGİLENDİRME TOAST BİLDİRİMİ -->
+    <!-- TOAST BİLDİRİMİ -->
     <div class="toast-notification" id="toastMsg">Ana menüye dönmek için butona basılı tutun!</div>
 
     <!-- MODAL PENCERE -->
@@ -709,11 +709,11 @@
             }, 300);
         }
 
-        // --- 0.5 SANİYE BASILI TUTMA VE ÇİFT TIKLAMA UYARI MANTIĞI ---
+        // --- 0.5 SANİYE BASILI TUTMA VE ÇİFT Tıklama MANTIĞI ---
         let holdTimer = null;
         let animationFrame = null;
         let startTime = null;
-        const holdDuration = 500; // 0.5 Saniye (500 ms)
+        const holdDuration = 500; // 0.5 Saniye
 
         let lastClickTime = 0;
         let toastTimeout = null;
@@ -753,7 +753,6 @@
                 if (progress < 1) {
                     animationFrame = requestAnimationFrame(updateProgress);
                 } else {
-                    // 0.5 saniye doldu -> 1. menüye dön
                     cancelHolding();
                     returnToSplash();
                 }
@@ -911,7 +910,7 @@
                 Kullanıcılarımızın güvenliğine büyük önem veriyoruz ve uygulamalarımızı yalnızca resmi web sitemiz <strong>bxasaran-developer.github.io</strong> üzerinden sunuyoruz. Verilerinizi korumak için ticari ve teknik olarak kabul edilebilir yöntemleri kullanmaya özen gösteriyoruz. Ancak internet üzerinden iletimin veya elektronik depolamanın hiçbir yönteminin %100 güvenli olmadığını hatırlatırız.
 
                 <h4>7. Diğer Sitelere Bağlantılar</h4>
-                Hizmetimiz veya uygulamalarımız, dış sitelere veya reklam bağlantılarına yönlendirmeler içerebilir. Üçüncü parti bir bağlantıya tıkladığınızda o siteye yönlendirilirsiniz. Bu dış siteler tarafımızca işletilmemektedir; bu nedenle ilgili sitelerin gizlilik politikalarını incelemenizi tavsiye ederiz.
+                Hizmetimiz veya uygulamalarımız, dış Sitelere veya reklam bağlantılarına yönlendirmeler içerebilir. Üçüncü parti bir bağlantıya tıkladığınızda o siteye yönlendirilirsiniz. Bu dış siteler tarafımızca işletilmemektedir; bu nedenle ilgili sitelerin gizlilik politikalarını incelemenizi tavsiye ederiz.
 
                 <h4>8. Çocukların Gizliliği</h4>
                 Hizmetlerimiz 13 yaşın altındaki çocukları hedef almaz ve 13 yaşın altındaki bireylerden bilinçli olarak hiçbir kişisel bilgi toplamayız. Böyle bir durumun tespit edilmesi halinde ilgili kayıtlar derhal sistemlerden silinir.
