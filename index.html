@@ -289,7 +289,7 @@
             color: #71717a;
         }
 
-        /* --- 2 SANİYE BASILI TUTMA EFEKTİNE SAHİP ULTRA ŞIK NEON BUTON --- */
+        /* --- 1 SANİYE BASILI TUTMA EFEKTİNE SAHİP ULTRA ŞIK NEON BUTON --- */
         .neon-side-btn {
             --hold-progress: 0;
             width: 50px;
@@ -315,7 +315,6 @@
             transform: scale(0.95);
         }
 
-        /* Basılı Tutunca İçini ve Etrafını Saran Neon Mor Dolum Efekti */
         .neon-side-btn::before {
             content: '';
             position: absolute;
@@ -331,7 +330,6 @@
             filter: drop-shadow(0 0 8px #c084fc);
         }
 
-        /* İç Arka Plan Dolgu Efekti */
         .neon-side-btn::after {
             content: '';
             position: absolute;
@@ -349,6 +347,34 @@
             filter: drop-shadow(0 0 6px rgba(232, 121, 249, 0.9));
             position: relative;
             z-index: 2;
+        }
+
+        /* --- ÇİFT TIKLAMA BİLGİLENDİRME TOAST BİLDİRİMİ --- */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: rgba(18, 14, 26, 0.92);
+            border: 1px solid rgba(232, 121, 249, 0.6);
+            color: #f3e8ff;
+            padding: 12px 22px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4), 0 0 20px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 3000;
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease;
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
         .section-header {
@@ -621,8 +647,8 @@
                     </svg>
                     <input type="text" id="searchInput" class="search-input" placeholder="Uygulama ara..." onkeyup="filterApps()">
                 </div>
-                <!-- 2 Saniye Basılı Tutma Özellikli Şık Neon Buton -->
-                <div class="neon-side-btn" id="sideMenuBtn" title="Ana Menüye Dönmek için 2 saniye basılı tutun">
+                <!-- 1 Saniye Basılı Tutma + Çift Tıklama Uyarı Özellikli Buton -->
+                <div class="neon-side-btn" id="sideMenuBtn" title="Ana Menüye Dönmek için 1 saniye basılı tutun">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
@@ -640,6 +666,9 @@
         </div>
     </div>
 
+    <!-- ÇİFT TIKLAMA BİLGİLENDİRME TOAST BİLDİRİMİ -->
+    <div class="toast-notification" id="toastMsg">Ana menüye dönmek için butona 1 saniye basılı tutun!</div>
+
     <!-- MODAL PENCERE -->
     <div class="modal-overlay" id="infoModal" onclick="closeModalOnBg(event)">
         <div class="modal-box">
@@ -654,6 +683,7 @@
         const storeScreen = document.getElementById('storeScreen');
         const bottomDrawer = document.getElementById('bottomDrawerHandle');
         const sideMenuBtn = document.getElementById('sideMenuBtn');
+        const toastMsg = document.getElementById('toastMsg');
 
         // Sayfa açıldığında hafızadaki durumu kontrol et
         window.addEventListener('DOMContentLoaded', () => {
@@ -679,14 +709,40 @@
             }, 300);
         }
 
-        // --- 2 SANİYE BASILI TUTMA MANTIĞI (LONG PRESS) ---
+        // --- 1 SANİYE BASILI TUTMA VE ÇİFT TIKLAMA UYARI MANTIĞI ---
         let holdTimer = null;
         let animationFrame = null;
         let startTime = null;
-        const holdDuration = 2000; // 2 Saniye
+        const holdDuration = 1000; // 1 Saniye
+
+        let lastClickTime = 0;
+        let toastTimeout = null;
+
+        function showToast() {
+            toastMsg.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastMsg.classList.remove('show');
+            }, 2200);
+        }
+
+        function handleButtonInteraction(e) {
+            const currentTime = new Date().getTime();
+            const timeDiff = currentTime - lastClickTime;
+
+            // Eğer 400ms içinde tekrar tıklandıysa (Çift Tıklama)
+            if (timeDiff < 400 && timeDiff > 0) {
+                showToast();
+                lastClickTime = 0;
+                return;
+            }
+            lastClickTime = currentTime;
+        }
 
         function startHolding(e) {
             e.preventDefault();
+            handleButtonInteraction(e);
+
             sideMenuBtn.classList.add('holding');
             startTime = performance.now();
 
@@ -698,7 +754,7 @@
                 if (progress < 1) {
                     animationFrame = requestAnimationFrame(updateProgress);
                 } else {
-                    // 2 saniye doldu -> 1. menüye dön ve sıfırla
+                    // 1 saniye basılı tutuldu -> 1. menüye dön ve sıfırla
                     cancelHolding();
                     returnToSplash();
                 }
@@ -848,7 +904,7 @@
                 Servisimizi kullandığınız zaman, uygulamada teknik bir hata oluştuğunda cihazınızda 'Log Verisi' adı altında teknik analiz verilerinin (üçüncü parti hata takip ürünleri aracılığıyla) toplanabileceğini bilmenizi isteriz. Bu Günlük Verileri; cihazınızın İnternet Protokolü ("IP") adresi, cihaz modeli, Android işletim sistemi sürümü, uygulama yapılandırması, kullanım zamanı ve tarihi gibi yalnızca hata ayıklamaya yönelik istatistikleri içerebilir. Ayrıca kötüye kullanımı ve modifikasyon girişimlerini önlemek amacıyla uygulama bütünlük doğrulamaları kullanılabilir.
 
                 <h4>4. Çerezler (Cookies)</h4>
-                Çerezler, genellikle anonim benzersiz tanımlayıcılar olarak kullanılan az miktarda veri içeren dosyalardır. Этот Servis doğrudan çerez kullanmaz; ancak uygulamalarımız ve web sitemiz, reklam gösterimi veya performans iyileştirmesi için çerezleri kullanan üçüncü parti kod ve kütüphaneleri barındırabilir. Tarayıcı veya cihaz ayarlarınızdan çerezleri reddetme seçeneğine sahipsiniz.
+                Çerezler, genellikle anonim benzersiz tanımlayıcılar olarak kullanılan az miktarda veri içeren dosyalardır. Bu Servis doğrudan çerez kullanmaz; ancak uygulamalarımız ve web sitemiz, reklam gösterimi veya performans iyileştirmesi için çerezleri kullanan üçüncü parti kod ve kütüphaneleri barındırabilir. Tarayıcı veya cihaz ayarlarınızdan çerezleri reddetme seçeneğine sahipsiniz.
 
                 <h4>5. Servis Sağlayıcıları</h4>
                 Hizmetimizi kolaylaştırmak, uygulama performansını analiz etmek veya standart reklam gösterimlerini sağlamak amacıyla güvenilir üçüncü parti altyapılarla çalışabiliriz. Bu servis sağlayıcıları yalnızca kendilerine verilen teknik görevleri yerine getirmek amacıyla anonim verilere erişebilir ve bilgileri başka bir amaçla kullanmamakla yükümlüdür.
