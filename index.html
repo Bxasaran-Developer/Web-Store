@@ -19,7 +19,7 @@
             font-family: 'Inter', sans-serif;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* İki ekranın birbirine karışmasını ve istenmeyen kaydırmaları engeller */
+            overflow: hidden;
         }
 
         /* Özel Modern Kaydırma Çubuğu */
@@ -35,7 +35,7 @@
         }
 
         /* =========================================================
-           1. EKRAN: NEON SPLASH & POLİTİKA MENÜSÜ (SABİT EKRAN)
+           1. EKRAN: NEON SPLASH & POLİTİKA MENÜSÜ
            ========================================================= */
         #splashScreen {
             position: fixed;
@@ -119,7 +119,6 @@
             line-height: 1.45;
         }
 
-        /* Orta Kısım: Politika Butonları */
         .splash-nav {
             display: flex;
             flex-direction: column;
@@ -181,54 +180,81 @@
             transform: translateX(4px);
         }
 
-        /* SADECE BU ALT ÇEKMECE ALANI KAYDIRILABİLİR */
+        /* --- YENİLENEN ULTRA MODERN VE AKICI ÇEKMECE BUTONU --- */
         .bottom-drawer-handle {
             width: 100%;
             max-width: 440px;
-            padding: 16px 20px;
-            border-radius: 22px;
-            background: linear-gradient(145deg, rgba(24, 24, 34, 0.85), rgba(14, 14, 20, 0.92));
-            border: 1px solid rgba(192, 132, 252, 0.35);
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
+            padding: 18px 22px;
+            border-radius: 24px;
+            background: linear-gradient(145deg, rgba(28, 24, 42, 0.85), rgba(12, 10, 18, 0.95));
+            border: 1px solid rgba(232, 121, 249, 0.45);
+            box-shadow: 
+                0 0 32px rgba(168, 85, 247, 0.3), 
+                0 8px 32px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 0 16px rgba(232, 121, 249, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             cursor: grab;
-            touch-action: none; /* Sadece bu alanda özel dokunma kaydırmasını yakalar */
+            touch-action: none;
             user-select: none;
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bottom-drawer-handle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(232, 121, 249, 0.25), transparent 70%);
+            pointer-events: none;
         }
 
         .bottom-drawer-handle:active {
             cursor: grabbing;
-            border-color: #e879f9;
-            box-shadow: 0 0 38px rgba(232, 121, 249, 0.4);
+            border-color: #f0abfc;
+            box-shadow: 
+                0 0 45px rgba(232, 121, 249, 0.5), 
+                0 10px 35px rgba(0, 0, 0, 0.7),
+                inset 0 0 24px rgba(232, 121, 249, 0.3);
+            transform: scale(0.98);
         }
 
         .drawer-pill-bar {
-            width: 42px;
-            height: 4px;
-            border-radius: 10px;
-            background: linear-gradient(90deg, #a855f7, #e879f9);
-            box-shadow: 0 0 10px #c084fc;
+            width: 46px;
+            height: 5px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #c084fc, #e879f9, #38ef7d);
+            background-size: 200% auto;
+            animation: neonBarFlow 4s linear infinite;
+            box-shadow: 0 0 12px #e879f9;
+        }
+
+        @keyframes neonBarFlow {
+            to { background-position: 200% center; }
         }
 
         .drawer-title {
-            font-size: 0.92rem;
+            font-size: 0.94rem;
             font-weight: 700;
-            color: #f3e8ff;
-            letter-spacing: 0.3px;
+            color: #fdf4ff;
+            letter-spacing: 0.4px;
             display: flex;
             align-items: center;
             gap: 8px;
+            text-shadow: 0 0 10px rgba(232, 121, 249, 0.6);
         }
 
         .drawer-title svg {
             width: 18px;
             height: 18px;
-            stroke: #e879f9;
+            stroke: #f0abfc;
+            filter: drop-shadow(0 0 6px #e879f9);
             animation: bounceUp 1.8s infinite;
         }
 
@@ -239,14 +265,14 @@
         }
 
         /* =========================================================
-           2. EKRAN: BAĞIMSIZ MAĞAZA EKRANI (EN ÜSTTEN BAŞLAR)
+           2. EKRAN: BAĞIMSIZ MAĞAZA EKRANI
            ========================================================= */
         #storeScreen {
             position: fixed;
             inset: 0;
             width: 100%;
             height: 100%;
-            overflow-y: auto; /* Sadece mağaza içeriği kendi içinde kayar */
+            overflow-y: auto;
             background: #050507;
             background-image: 
                 radial-gradient(circle at 50% -5%, rgba(168, 85, 247, 0.2), transparent 50%),
@@ -266,10 +292,9 @@
             gap: 16px;
         }
 
-        /* SEARCH BAR'IN ÜSTÜNDE TAMAMEN AYRI VE ŞIK NEON ÇEKMECE ALANI */
         .top-pull-zone {
             position: relative;
-            z-index: 50; /* Search bar'ın her zaman üstünde kalır, asla arkasına kaçmaz */
+            z-index: 50;
             width: 100%;
             height: 64px;
             display: flex;
@@ -304,7 +329,6 @@
             cursor: grabbing;
         }
 
-        /* Çektikçe Etrafını Saran Neon Mor/Pembe Enerji Halkası */
         .neon-pull-btn::before {
             content: '';
             position: absolute;
@@ -324,7 +348,6 @@
             filter: drop-shadow(0 0 10px rgba(232, 121, 249, 0.9));
         }
 
-        /* Dış İnce Neon Halka Çerçevesi */
         .neon-pull-btn::after {
             content: '';
             position: absolute;
@@ -338,12 +361,11 @@
             width: 24px;
             height: 24px;
             stroke: #f3e8ff;
-            transform: rotate(90deg); /* > ikonunu şık aşağı oka çevirir */
+            transform: rotate(90deg);
             filter: drop-shadow(0 0 6px rgba(232, 121, 249, 0.8));
             transition: transform 0.2s ease;
         }
 
-        /* Search Bar (Z-index olarak top-pull-zone'un altında, güvenli alanda) */
         .search-container {
             position: relative;
             z-index: 10;
@@ -636,7 +658,7 @@
             </button>
         </div>
 
-        <!-- Sadece Bu Alt Çekmece Alanı Yukarı Kaydırılabilir -->
+        <!-- YENİLENEN ULTRA ŞIK NEON ÇEKMECE ALANI -->
         <div class="bottom-drawer-handle" id="bottomDrawerHandle">
             <div class="drawer-pill-bar"></div>
             <div class="drawer-title">
@@ -651,7 +673,6 @@
     <!-- 2. EKRAN: BAĞIMSIZ MAĞAZA EKRANI -->
     <div id="storeScreen">
         <div class="container">
-            <!-- Search Bar'ın Üstünde Tamamen Bağımsız Neon Çekmece Butonu -->
             <div class="top-pull-zone">
                 <div class="neon-pull-btn" id="pullHandleBtn" title="Menüye dönmek için aşağı çekin">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -694,19 +715,31 @@
         const bottomDrawer = document.getElementById('bottomDrawerHandle');
         const pullBtn = document.getElementById('pullHandleBtn');
 
+        // Sayfa açıldığında hafızadaki durumu kontrol et
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedState = localStorage.getItem('bxasaran_view');
+            if (savedState === 'store') {
+                splash.classList.add('slide-up', 'no-anim');
+                storeScreen.scrollTop = 0;
+            }
+        });
+
         function enterStore() {
-            storeScreen.scrollTop = 0; // Mağazayı kesin olarak en üstten başlat
+            localStorage.setItem('bxasaran_view', 'store');
+            splash.classList.remove('no-anim');
+            storeScreen.scrollTop = 0;
             splash.classList.add('slide-up');
         }
 
         function returnToSplash() {
+            localStorage.setItem('bxasaran_view', 'splash');
             splash.classList.remove('slide-up');
             setTimeout(() => {
                 storeScreen.scrollTop = 0;
             }, 300);
         }
 
-        // 1. Ekranda SADECE alt çekmece (bottomDrawer) yukarı kaydırılınca mağazayı aç
+        // 1. Ekranda alt çekmece yukarı kaydırılınca mağazayı aç
         let drawerStartY = 0;
         let isDrawerDragging = false;
 
@@ -728,12 +761,11 @@
             isDrawerDragging = false;
             bottomDrawer.style.transform = 'translateY(0)';
             const deltaY = drawerStartY - e.changedTouches[0].clientY;
-            if (deltaY > 45) {
+            if (deltaY > 40) {
                 enterStore();
             }
         });
 
-        // Masaüstü fare desteği için alt çekmece kaydırma
         bottomDrawer.addEventListener('mousedown', e => {
             isDrawerDragging = true;
             drawerStartY = e.clientY;
@@ -752,12 +784,12 @@
             isDrawerDragging = false;
             bottomDrawer.style.transform = 'translateY(0)';
             const deltaY = drawerStartY - e.clientY;
-            if (deltaY > 45) {
+            if (deltaY > 40) {
                 enterStore();
             }
         });
 
-        // 2. Ekranda SADECE neonPullBtn'i tutup aşağı çekince etrafı mor dolar ve 1. menüye döner
+        // 2. Ekranda neonPullBtn aşağı çekilince 1. menüye dön
         let isPulling = false;
         let pullStartY = 0;
         const maxPullDistance = 100;
@@ -772,7 +804,6 @@
             if (!isPulling) return;
             const deltaY = Math.max(0, clientY - pullStartY);
             const progress = Math.min(1, deltaY / maxPullDistance);
-            // Buton search bar'a çarpmayacak kadar kontrollü aşağı esner (en fazla 18px)
             const visualTranslate = Math.min(deltaY * 0.18, 18);
 
             pullBtn.style.setProperty('--pull-progress', progress.toFixed(3));
