@@ -280,6 +280,8 @@
             width: 100%;
             padding: 24px;
             color: #e4e4e7;
+            max-height: 85vh;
+            overflow-y: auto;
         }
 
         .modal-title {
@@ -348,20 +350,20 @@
                 </svg>
                 <span>Güvenliğiniz<br>İçin</span>
             </button>
+            <button class="nav-pill" onclick="openModal('gizlilik')">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <span>Gizlilik<br>Politikamız</span>
+            </button>
             <button class="nav-pill" onclick="openModal('hakkimizda')">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"/>
                     <line x1="12" y1="16" x2="12" y2="12"/>
                     <line x1="12" y1="8" x2="12.01" y2="8"/>
                 </svg>
-                <span>Hakkımızda</span>
-            </button>
-            <button class="nav-pill" onclick="openModal('gelir')">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="5" width="20" height="14" rx="2"/>
-                    <line x1="2" y1="10" x2="22" y2="10"/>
-                </svg>
-                <span>Gelir Modelimiz<br>Hakkında</span>
+                <span>Hakkımızda &<br>Gelir Politikası</span>
             </button>
         </nav>
 
@@ -448,15 +450,25 @@
                 body: `Uygulamalarımızın güvenliği, bütünlüğü ve güncelliği yalnızca resmi web sitemiz <strong>Bxasaran Store</strong> tarafından garanti edilmektedir.<br><br>
                 Web sitemiz dışında (üçüncü taraf APK siteleri, forumlar, Telegram kanalları veya dosya paylaşım platformları aracılığıyla) yayımlanan hiçbir dosya <strong>tarafımıza ait değildir</strong>. Cihazınızın güvenliği için uygulamalarımızı <strong>asla başka bir kaynaktan indirmeyiniz</strong>.`
             },
-            hakkimizda: {
-                title: "Hakkımızda & Ücretsiz Kullanım Politikası",
-                body: `<strong>Bxasaran Store</strong> olarak geliştirdiğimiz ve düzenlediğimiz tüm uygulamalar tamamen <strong>ücretsizdir</strong>.<br><br>
-                Kullanıcılarımızdan hiçbir şekilde <strong>para, bağış, abonelik ücreti veya maddi destek</strong> talep edilmemektedir. Adımıza veya uygulamalarımız üzerinden sizden para isteyen hiçbir kişi, kurum veya siteye itibar etmeyiniz.`
+            gizlilik: {
+                title: "Gizlilik Politikamız ve Veri Güvenliği",
+                body: `Sitemiz ve uygulamalarımız üzerinden kullanıcı gizliliğine son derece önem verilmektedir.<br><br>
+                1. Ziyaretçilerimizin gizliliğini korumak temel ilkemizdir.<br>
+                2. Uygulamalarımız kişisel verilerinizi izinsiz toplamaz.<br>
+                3. Çerezler yalnızca site deneyiminizi iyileştirmek amacıyla kullanılabilir.<br>
+                4. Paylaştığınız veya indirdiğiniz dosyalar tamamen güvenlidir.<br>
+                5. Üçüncü taraf yazılımlarla verileriniz asla paylaşılmaz.<br>
+                6. Reklam ortaklarımız yalnızca anonim gösterim verileri işleyebilir.<br>
+                7. Sunucu tarafında hiçbir hassas kişisel bilgi depolanmaz.<br>
+                8. Güvenlik standartlarımız düzenli olarak güncellenmektedir.<br>
+                9. Sitemizi kullanarak bu gizlilik ilkelerini kabul etmiş olursunuz.<br>
+                10. Herhangi bir gizlilik endişesinde resmi iletişim kanallarımız üzerinden bizimle her zaman güvenle iletişime geçebilirsiniz.`
             },
-            gelir: {
-                title: "Gelir Modelimiz Hakkında",
-                body: `Uygulamalarımızın geliştirme, bakım ve sunucu maliyetlerini karşılayabilmek adına tek gelir kaynağımız <strong>uygulama içi reklamlardır</strong>.<br><br>
-                Sizlerden herhangi bir ödeme veya bağış talep edilmez; yalnızca projelerimizi sürdürebilmemizi sağlayan standart reklam gösterimleri mevcuttur.`
+            hakkimizda: {
+                title: "Hakkımızda & Gelir Politikamız",
+                body: `<strong>Bxasaran Store</strong> olarak geliştirdiğimiz ve düzenlediğimiz tüm uygulamalar tamamen <strong>ücretsizdir</strong>.<br><br>
+                Kullanıcılarımızdan hiçbir şekilde <strong>para, bağış, abonelik ücreti veya maddi destek</strong> talep edilmemektedir. Adımıza veya uygulamalarımız üzerinden sizden para isteyen hiçbir kişi, kurum veya siteye itibar etmeyiniz.<br><br>
+                Uygulamalarımızın geliştirme, bakım ve sunucu maliyetlerini karşılayabilmek adına tek gelir kaynağımız <strong>uygulama içi reklamlardır</strong>. Sizlerden herhangi bir ödeme veya bağış talep edilmez; yalnızca projelerimizi sürdürebilmemizi sağlayan standart reklam gösterimleri mevcuttur.`
             }
         };
 
