@@ -24,5 +24,18 @@
       "images/screenshots/ekran_goruntuleri.png"
     ],
     "featured": false
+  },
+  {
+    "name": "Yakında Yayında tryp",
+    "category": "Multimedya",
+    "version": "16.0",
+    "size": "25 MB",
+    "description": "Televizyon ve medya içeriklerini yüksek kalitede takip edebileceğiniz özel medya oynatıcı uygulaması.",
+    "downloadUrl": "basaran_logo.png",
+    "iconUrl": "images/logo/app.logo",
+    "screenshots": [
+      "images/screenshots/ekran_goruntuleri.png"
+    ],
+    "featured": false
   }
 ]
