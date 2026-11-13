@@ -13,32 +13,46 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* Özel Modern Kaydırma Çubuğu */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070709;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(200, 130, 214, 0.3);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(200, 130, 214, 0.6);
+        }
+
         body {
             background-color: #070709;
             background-image: 
-                radial-gradient(circle at 50% -10%, rgba(168, 85, 247, 0.18), transparent 45%),
-                radial-gradient(circle at 85% 40%, rgba(56, 239, 125, 0.06), transparent 40%);
+                radial-gradient(circle at 50% -10%, rgba(168, 85, 247, 0.22), transparent 45%),
+                radial-gradient(circle at 85% 40%, rgba(56, 239, 125, 0.08), transparent 40%),
+                radial-gradient(circle at 15% 80%, rgba(14, 165, 233, 0.08), transparent 40%);
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* --- İLK AÇILIŞ (SPLASH) EKRANI & GEZEGEN LOGO --- */
+        /* --- İLK AÇILIŞ (SPLASH) EKRANI & ULTRA MODERN LOGO --- */
         #splashScreen {
             position: fixed;
             inset: 0;
-            background: #070709;
-            background-image: 
-                radial-gradient(circle at 50% 30%, rgba(200, 130, 214, 0.15), transparent 50%),
-                radial-gradient(circle at 50% 90%, rgba(56, 239, 125, 0.08), transparent 40%);
+            background: rgba(7, 7, 9, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
             padding: 25px 16px;
-            /* Akıcı yukarı kaydırma geçiş animasyonu */
             transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
         }
 
@@ -58,7 +72,9 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.35rem;
             font-weight: 700;
-            color: #a1a1aa;
+            background: linear-gradient(135deg, #ffffff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: 0.5px;
         }
 
@@ -67,35 +83,55 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 12px;
+            gap: 16px;
             width: 100%;
             max-width: 480px;
         }
 
-        /* Dönen Gezegen Logo Alanı */
+        /* ULTRA ŞIK & MODERN DÖNEN GEZEGEN LOGO EFEKTİ */
         .splash-globe-container {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            filter: drop-shadow(0 0 20px rgba(200, 130, 214, 0.35));
         }
 
         .splash-logo-img {
-            width: 110px;
-            height: 110px;
+            width: 105px;
+            height: 105px;
             object-fit: contain;
             border-radius: 50%;
             z-index: 2;
+            position: relative;
+            animation: floatLogo 4s ease-in-out infinite;
         }
 
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* Çok Katmanlı Modern Neon Yörünge */
         .orbit-ring {
             position: absolute;
             inset: 0;
-            border: 2px dashed rgba(200, 130, 214, 0.4);
+            border: 2px solid transparent;
+            border-top-color: #c882d6;
+            border-bottom-color: #38ef7d;
             border-radius: 50%;
-            animation: rotateOrbit 10s linear infinite;
+            animation: rotateOrbit 6s linear infinite;
+            z-index: 1;
+        }
+
+        .orbit-ring-glow {
+            position: absolute;
+            inset: -6px;
+            border: 1px dashed rgba(200, 130, 214, 0.35);
+            border-radius: 50%;
+            animation: rotateOrbitReverse 12s linear infinite;
             z-index: 1;
         }
 
@@ -104,37 +140,45 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes rotateOrbitReverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
         .splash-subtitle {
             font-size: 0.88rem;
             color: #a1a1aa;
             max-width: 280px;
             line-height: 1.4;
+            font-weight: 400;
         }
 
-        /* Politika Butonları */
+        /* Glassmorphism Politika Butonları */
         .splash-nav {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             width: 100%;
             max-width: 480px;
         }
 
         .splash-pill {
-            background: rgba(24, 24, 30, 0.85);
-            border: 1px solid rgba(200, 130, 214, 0.25);
-            border-radius: 12px;
-            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px 16px;
             color: #e4e4e7;
             font-family: 'Inter', sans-serif;
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(8px);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
         }
 
         .splash-pill svg {
@@ -142,20 +186,26 @@
             height: 18px;
             stroke: #c882d6;
             flex-shrink: 0;
+            transition: transform 0.2s ease;
         }
 
         .splash-pill:hover {
-            background: rgba(200, 130, 214, 0.16);
-            border-color: rgba(200, 130, 214, 0.5);
+            background: rgba(200, 130, 214, 0.12);
+            border-color: rgba(200, 130, 214, 0.4);
             color: #ffffff;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(200, 130, 214, 0.15);
+        }
+
+        .splash-pill:hover svg {
+            transform: scale(1.1);
         }
 
         .splash-bottom {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             width: 100%;
         }
 
@@ -163,19 +213,20 @@
             background: linear-gradient(135deg, #9c4dcc, #c882d6);
             border: none;
             color: #09090b;
-            padding: 10px 28px;
-            border-radius: 12px;
+            padding: 12px 32px;
+            border-radius: 14px;
             font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 14px rgba(200, 130, 214, 0.3);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 20px rgba(200, 130, 214, 0.35);
         }
 
         .more-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(200, 130, 214, 0.5);
         }
 
         .bounce-arrow {
@@ -214,11 +265,12 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 22px;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
@@ -226,7 +278,9 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.35rem;
             font-weight: 700;
-            color: #a1a1aa;
+            background: linear-gradient(135deg, #ffffff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: 0.5px;
         }
 
@@ -242,12 +296,20 @@
         .search-container {
             display: flex;
             align-items: center;
-            background: rgba(22, 22, 28, 0.85);
-            border: 1px solid rgba(200, 130, 214, 0.25);
-            border-radius: 14px;
-            padding: 10px 14px;
-            gap: 10px;
-            backdrop-filter: blur(8px);
+            background: rgba(22, 22, 28, 0.75);
+            border: 1px solid rgba(200, 130, 214, 0.2);
+            border-radius: 16px;
+            padding: 12px 16px;
+            gap: 12px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-container:focus-within {
+            border-color: rgba(200, 130, 214, 0.6);
+            box-shadow: 0 0 20px rgba(200, 130, 214, 0.2);
         }
 
         .search-container svg {
@@ -262,7 +324,7 @@
             border: none;
             outline: none;
             color: #ffffff;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             width: 100%;
             font-family: 'Inter', sans-serif;
         }
@@ -275,7 +337,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: -6px;
+            margin-bottom: -4px;
             padding: 0 4px;
         }
 
@@ -288,35 +350,38 @@
         .app-count {
             font-size: 0.75rem;
             color: #a1a1aa;
-            background: rgba(255, 255, 255, 0.06);
-            padding: 3px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
             border-radius: 20px;
         }
 
         .apps-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .modern-app-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(22, 22, 28, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(22, 22, 28, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 20px;
-            padding: 14px;
+            padding: 16px;
             text-decoration: none;
             color: #ffffff;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .modern-app-card:hover {
-            background: rgba(30, 30, 38, 0.95);
-            border-color: rgba(200, 130, 214, 0.45);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            background: rgba(30, 30, 38, 0.85);
+            border-color: rgba(200, 130, 214, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 130, 214, 0.1);
         }
 
         .app-left {
@@ -326,12 +391,13 @@
         }
 
         .app-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 15px;
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
             object-fit: cover;
             border: 1px solid rgba(255, 255, 255, 0.08);
             background: #121212;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .app-info {
@@ -357,7 +423,8 @@
         .tag-free {
             color: #4ade80;
             background: rgba(74, 222, 128, 0.12);
-            padding: 2px 7px;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            padding: 2px 8px;
             border-radius: 6px;
             font-weight: 600;
             font-size: 0.68rem;
@@ -368,34 +435,40 @@
             color: #09090b;
             font-weight: 700;
             font-size: 0.8rem;
-            padding: 9px 16px;
-            border-radius: 12px;
+            padding: 10px 18px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 4px 14px rgba(200, 130, 214, 0.3);
+            box-shadow: 0 4px 15px rgba(200, 130, 214, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .modern-app-card:hover .download-pill {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(200, 130, 214, 0.5);
         }
 
         .no-result {
             text-align: center;
             color: #71717a;
-            font-size: 0.85rem;
-            padding: 20px 0;
+            font-size: 0.88rem;
+            padding: 30px 0;
         }
 
         /* --- MODAL PENCERE ANİMASYONLARI (FADE & ZOOM) --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             z-index: 1000;
             
-            /* Başlangıçta gizli ve tıklanamaz */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -408,9 +481,9 @@
 
         .modal-box {
             background: #111115;
-            border: 1px solid #c882d6;
-            box-shadow: 0 0 30px rgba(200, 130, 214, 0.3);
-            border-radius: 18px;
+            border: 1px solid rgba(200, 130, 214, 0.4);
+            box-shadow: 0 0 40px rgba(200, 130, 214, 0.25), 0 20px 40px rgba(0,0,0,0.6);
+            border-radius: 22px;
             max-width: 460px;
             width: 100%;
             padding: 24px;
@@ -418,9 +491,8 @@
             max-height: 85vh;
             overflow-y: auto;
             
-            /* Kutu açılma animasyon efekti (küçükten normal boyuta) */
-            transform: scale(0.9) translateY(20px);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.85) translateY(20px);
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .modal-overlay.active .modal-box {
@@ -432,7 +504,7 @@
             font-weight: 700;
             color: #e5a9f2;
             margin-bottom: 12px;
-            border-bottom: 1px solid #27272a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 10px;
         }
 
@@ -462,33 +534,36 @@
         .close-btn {
             margin-top: 20px;
             width: 100%;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
             border: none;
             background: linear-gradient(90deg, #9c4dcc, #c882d6);
             color: #000;
             font-weight: 700;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(200, 130, 214, 0.3);
         }
 
         .close-btn:hover {
-            opacity: 0.9;
+            opacity: 0.95;
+            transform: translateY(-1px);
         }
     </style>
 </head>
 <body>
 
-    <!-- İLK AÇILIŞ SPLASH EKRANI (Dönen Logolu ve Politikalar) -->
+    <!-- İLK AÇILIŞ SPLASH EKRANI -->
     <div id="splashScreen">
         <div class="splash-top">
             <span class="brand-logo-text">Bxasaran Store</span>
         </div>
 
         <div class="splash-center">
-            <!-- Gezegen Gibi Etrafı Dönen Logo Alanı -->
+            <!-- Modern Çift Katmanlı Dönen Yörünge ve Logo Alanı -->
             <div class="splash-globe-container">
+                <div class="orbit-ring-glow"></div>
                 <div class="orbit-ring"></div>
                 <img src="splash_logo.png" alt="Bxasaran Logo" class="splash-logo-img" onerror="this.style.display='none'">
             </div>
