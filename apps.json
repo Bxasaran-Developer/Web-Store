@@ -8,21 +8,21 @@
     "downloadUrl": "basaran_logo.png",
     "iconUrl": "images/logo/app.logo",
     "screenshots": [
-      "images/screenshots/ekran_goruntuleri.png",
       "images/screenshots/ekran_goruntuleri.png"
-    ]
+    ],
+    "featured": true
   },
   {
-    "name": "Yakında Yayında",
+    "name": "Dosya Yöneticisi Pro",
     "category": "Dosya Yöneticisi",
     "version": "Son Sürüm",
     "size": "18 MB",
-    "description": "Cihazınızdaki dosyaları hızlı, güvenli ve düzenli bir şekilde yönetmenizi sağlayan gelişmiş dosya yöneticisi.",
+    "description": "Cihazınızdaki dosyaları hızlı ve güvenli yönetin.",
     "downloadUrl": "basaran_logo.png",
     "iconUrl": "images/logo/app.logo",
     "screenshots": [
-      "images/screenshots/ekran_goruntuleri.png",
       "images/screenshots/ekran_goruntuleri.png"
-    ]
+    ],
+    "featured": false
   }
 ]
