@@ -1,7 +1,7 @@
 [
   {
     "name": "Yakında Yayında",
-    "category": "Tv & Medya",
+    "category": "Yakında Yayında",
     "version": "16.0",
     "size": "25 MB",
     "description": "Televizyon ve medya içeriklerini yüksek kalitede takip edebileceğiniz özel medya oynatıcı uygulaması.",
@@ -10,11 +10,11 @@
     "screenshots": [
       "images/screenshots/ekran_goruntuleri.png"
     ],
-    "featured": true
+    "featured": false
   },
   {
-    "name": "Dosya Yöneticisi Pro",
-    "category": "Dosya Yöneticisi",
+    "name": "Yakında Yayında",
+    "category": "Yakında Yayında",
     "version": "Son Sürüm",
     "size": "18 MB",
     "description": "Cihazınızdaki dosyaları hızlı ve güvenli yönetin.",
@@ -23,11 +23,11 @@
     "screenshots": [
       "images/screenshots/ekran_goruntuleri.png"
     ],
-    "featured": true
+    "featured": false
   },
   {
-    "name": "Yakında Yayında tryp",
-    "category": "Tv & Medya",
+    "name": "Yakında Yayında",
+    "category": "Yakında Yayında",
     "version": "16.0",
     "size": "25 MB",
     "description": "Televizyon ve medya içeriklerini yüksek kalitede takip edebileceğiniz özel medya oynatıcı uygulaması.",
