@@ -346,9 +346,23 @@
             z-index: 2;
         }
 
-        /* DİNAMİK ÖNE ÇIKANLAR SLIDER (JSON BAĞLI) */
-        .featured-slider {
-            width: 100%;
+        /* YANA KAYDIRILABİLİR ÖNE ÇIKANLAR ALANI (HORIZONTAL SLIDER) */
+        .featured-scroll-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+
+        .featured-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .featured-card {
+            min-width: 280px;
+            max-width: 320px;
+            flex: 1;
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(15, 23, 42, 0.9));
             border: 1px solid rgba(59, 130, 246, 0.35);
             border-radius: 20px;
@@ -361,10 +375,16 @@
             box-shadow: 0 8px 24px rgba(3, 7, 18, 0.5);
             position: relative;
             overflow: hidden;
-            display: none; /* Varsayılan gizli, JSON'da featured:true olunca açılır */
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: border-color 0.25s ease;
         }
 
-        .featured-slider::before {
+        .featured-card:hover {
+            border-color: rgba(96, 165, 250, 0.7);
+        }
+
+        .featured-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 4px; height: 100%;
@@ -375,6 +395,7 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+            overflow: hidden;
         }
 
         .featured-badge {
@@ -394,11 +415,18 @@
             font-size: 0.98rem;
             font-weight: 700;
             color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .featured-desc {
             font-size: 0.78rem;
             color: #94a3b8;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .featured-btn {
@@ -412,11 +440,7 @@
             cursor: pointer;
             box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
             white-space: nowrap;
-            transition: transform 0.2s ease;
-        }
-
-        .featured-btn:active {
-            transform: scale(0.94);
+            flex-shrink: 0;
         }
 
         /* KATEGORİ SEKMELERİ */
@@ -832,14 +856,9 @@
                 </div>
             </div>
 
-            <!-- DİNAMİK ÖNE ÇIKANLAR SLIDER (JSON'A BAĞLI) -->
-            <div class="featured-slider" id="featuredSlider">
-                <div class="featured-content">
-                    <span class="featured-badge">Öne Çıkan</span>
-                    <div class="featured-title" id="featuredTitle">Uygulama Adı</div>
-                    <div class="featured-desc" id="featuredDesc">Açıklama</div>
-                </div>
-                <button class="featured-btn" id="featuredBtnBtn">İncele</button>
+            <!-- YANA KAYDIRILABİLİR ÖNE ÇIKANLAR ALANI (HORIZONTAL SLIDER) -->
+            <div class="featured-scroll-container" id="featuredContainer" style="display: none;">
+                <!-- Dinamik Öne Çıkan Kartlar Buraya Yüklenir -->
             </div>
 
             <!-- DİNAMİK KATEGORİ SEKMELERİ -->
@@ -1010,7 +1029,7 @@
             }
         });
 
-        // UYGULAMALAR VE ÖNE ÇIKAN YÖNETİMİ
+        // UYGULAMALAR VE ÖNE ÇIKANLAR YÖNETİMİ
         let allApps = [];
         let currentCategory = 'Tümü';
 
@@ -1037,18 +1056,24 @@
         }
 
         function renderFeatured() {
-            const featuredSlider = document.getElementById('featuredSlider');
-            // apps.json içinde "featured": true olan uygulamayı bul
-            const featuredAppIndex = allApps.findIndex(app => app.featured === true);
+            const container = document.getElementById('featuredContainer');
+            // apps.json içinde "featured": true olan TÜM uygulamaları bul
+            const featuredApps = allApps.map((app, index) => ({ app, index })).filter(item => item.app.featured === true);
 
-            if (featuredAppIndex !== -1) {
-                const app = allApps[featuredAppIndex];
-                document.getElementById('featuredTitle').innerText = app.name;
-                document.getElementById('featuredDesc').innerText = app.description || `${app.category} kategorisindeki öne çıkan uygulama.`;
-                document.getElementById('featuredBtnBtn').setAttribute('onclick', `openAppDetail(${featuredAppIndex})`);
-                featuredSlider.style.display = 'flex';
+            if (featuredApps.length > 0) {
+                container.innerHTML = featuredApps.map(item => `
+                    <div class="featured-card" onclick="openAppDetail(${item.index})">
+                        <div class="featured-content">
+                            <span class="featured-badge">Öne Çıkan</span>
+                            <div class="featured-title">${item.app.name}</div>
+                            <div class="featured-desc">${item.app.description || item.app.category}</div>
+                        </div>
+                        <button class="featured-btn">İncele</button>
+                    </div>
+                `).join('');
+                container.style.display = 'flex';
             } else {
-                featuredSlider.style.display = 'none';
+                container.style.display = 'none';
             }
         }
 
