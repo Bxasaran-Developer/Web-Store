@@ -6,10 +6,10 @@
     "size": "25 MB",
     "description": "Televizyon ve medya içeriklerini yüksek kalitede takip edebileceğiniz özel medya oynatıcı uygulaması.",
     "downloadUrl": "basaran_logo.png",
-    "iconUrl": "basaran_logo.png",
+    "iconUrl": "images/logo/app.logo",
     "screenshots": [
-      "basaran_logo.png",
-      "basaran_logo.png"
+      "images/screenshots/ekran_goruntuleri.png",
+      "images/screenshots/ekran_goruntuleri.png"
     ]
   },
   {
@@ -19,10 +19,10 @@
     "size": "18 MB",
     "description": "Cihazınızdaki dosyaları hızlı, güvenli ve düzenli bir şekilde yönetmenizi sağlayan gelişmiş dosya yöneticisi.",
     "downloadUrl": "basaran_logo.png",
-    "iconUrl": "basaran_logo.png",
+    "iconUrl": "images/logo/app.logo",
     "screenshots": [
-      "basaran_logo.png",
-      "basaran_logo.png"
+      "images/screenshots/ekran_goruntuleri.png",
+      "images/screenshots/ekran_goruntuleri.png"
     ]
   }
 ]
