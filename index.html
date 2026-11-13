@@ -24,6 +24,7 @@
 
         ::-webkit-scrollbar {
             width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
             background: transparent;
@@ -349,7 +350,7 @@
             z-index: 2;
         }
 
-        /* --- 2. ÖZELLİK: ÖNE ÇIKANLAR SLIDER (MANŞET ALANI) --- */
+        /* ÖNE ÇIKANLAR SLIDER */
         .featured-slider {
             width: 100%;
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(15, 23, 42, 0.9));
@@ -421,7 +422,7 @@
             transform: scale(0.94);
         }
 
-        /* --- 1. ÖZELLİK: KATEGORİ SEKMELERİ (CHIPS) --- */
+        /* DİNAMİK KATEGORİ SEKMELERİ */
         .categories-scroll {
             display: flex;
             gap: 8px;
@@ -568,7 +569,7 @@
             padding: 28px 0;
         }
 
-        /* --- TOAST BİLDİRİMİ --- */
+        /* TOAST BİLDİRİMİ */
         .toast-notification {
             position: fixed;
             bottom: 30px;
@@ -596,7 +597,7 @@
             opacity: 1;
         }
 
-        /* --- MODAL VE UYGULAMA DETAY PENCERESİ (Görseldeki Tasarım) --- */
+        /* MODAL VE UYGULAMA DETAY PENCERESİ */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -669,7 +670,7 @@
             margin-bottom: 8px;
         }
 
-        /* Uygulama Detay Modal İçeriği Özel Stilleri */
+        /* Uygulama Detay Modal İçeriği */
         .app-detail-header {
             display: flex;
             align-items: center;
@@ -733,8 +734,35 @@
             margin: 14px 0;
         }
 
+        /* EKRAN GÖRÜNTÜLERİ GALERİ ALANI */
+        .screenshots-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #93c5fd;
+            margin-bottom: 8px;
+            margin-top: 14px;
+        }
+
+        .screenshots-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+
+        .screenshot-item {
+            width: 120px;
+            height: 220px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: #030712;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(3, 7, 18, 0.5);
+        }
+
         .close-btn {
-            margin-top: 16px;
+            margin-top: 20px;
             width: 100%;
             padding: 12px;
             border-radius: 14px;
@@ -827,22 +855,19 @@
                 </div>
             </div>
 
-            <!-- 2. ÖZELLİK: ÖNE ÇIKANLAR SLIDER (MANŞET ALANI) -->
+            <!-- ÖNE ÇIKANLAR SLIDER -->
             <div class="featured-slider" id="featuredSlider">
                 <div class="featured-content">
                     <span class="featured-badge">Öne Çıkan</span>
-                    <div class="featured-title" id="featuredTitle">Bxasaran Store v2.0</div>
-                    <div class="featured-desc" id="featuredDesc">En güvenli ve güncel araçları keşfedin.</div>
+                    <div class="featured-title">Bxasaran Store v2.0</div>
+                    <div class="featured-desc">En güvenli ve güncel araçları keşfedin.</div>
                 </div>
                 <button class="featured-btn" onclick="openFeaturedApp()">İncele</button>
             </div>
 
-            <!-- 1. ÖZELLİK: KATEGORİ SEKMELERİ (CHIPS) -->
+            <!-- DİNAMİK KATEGORİ SEKMELERİ (Otomatik Oluşur) -->
             <div class="categories-scroll" id="categoriesScroll">
                 <div class="cat-chip active" onclick="filterByCategory('Tümü', this)">Tümü</div>
-                <div class="cat-chip" onclick="filterByCategory('Tv & Medya', this)">Tv & Medya</div>
-                <div class="cat-chip" onclick="filterByCategory('Dosya Yöneticisi', this)">Dosya Yöneticisi</div>
-                <div class="cat-chip" onclick="filterByCategory('Araçlar', this)">Araçlar</div>
             </div>
 
             <div class="section-header">
@@ -859,7 +884,7 @@
     <!-- TOAST BİLDİRİMİ -->
     <div class="toast-notification" id="toastMsg">Ana menüye dönmek için butona basılı tutun!</div>
 
-    <!-- 3. ÖZELLİK: UYGULAMA DETAY SAYFASI / MODAL PENCERE -->
+    <!-- UYGULAMA DETAY SAYFASI / EKRAN GÖRÜNTÜLERİ MODALI -->
     <div class="modal-overlay" id="infoModal" onclick="closeModalOnBg(event)">
         <div class="modal-box">
             <h3 class="modal-title" id="modalTitle">Başlık</h3>
@@ -875,7 +900,6 @@
         const sideMenuBtn = document.getElementById('sideMenuBtn');
         const toastMsg = document.getElementById('toastMsg');
 
-        // Sayfa açıldığında hafızadaki durumu kontrol et
         window.addEventListener('DOMContentLoaded', () => {
             const savedState = localStorage.getItem('bxasaran_view');
             if (savedState === 'store') {
@@ -902,7 +926,7 @@
         // --- 0.5 SANİYE BASILI TUTMA VE ÇİFT TIKLAMA MANTIĞI ---
         let animationFrame = null;
         let startTime = null;
-        const holdDuration = 500; // 0.5 Saniye
+        const holdDuration = 500;
         let lastClickTime = 0;
         let toastTimeout = null;
 
@@ -1009,7 +1033,7 @@
             }
         });
 
-        // --- UYGULAMALAR VE FİLTRELEME ---
+        // --- UYGULAMALAR VE DİNAMİK KATEGORİ OLUŞTURMA ---
         let allApps = [];
         let currentCategory = 'Tümü';
 
@@ -1017,11 +1041,22 @@
             try {
                 const response = await fetch('apps.json');
                 allApps = await response.json();
+                buildCategories();
                 renderApps(allApps);
             } catch (error) {
                 console.error("Uygulamalar yüklenirken hata oluştu:", error);
                 document.getElementById('appsContainer').innerHTML = '<div class="no-result">Uygulamalar yüklenemedi. apps.json dosyasını kontrol edin.</div>';
             }
+        }
+
+        function buildCategories() {
+            const categoriesScroll = document.getElementById('categoriesScroll');
+            // Benzersiz kategorileri bul
+            const categories = ['Tümü', ...new Set(allApps.map(app => app.category).filter(Boolean))];
+
+            categoriesScroll.innerHTML = categories.map((cat, idx) => `
+                <div class="cat-chip ${idx === 0 ? 'active' : ''}" onclick="filterByCategory('${cat}', this)">${cat}</div>
+            `).join('');
         }
 
         function renderApps(apps) {
@@ -1054,7 +1089,6 @@
             currentCategory = category;
             document.querySelectorAll('.cat-chip').forEach(chip => chip.classList.remove('active'));
             element.classList.add('active');
-
             applyFilters();
         }
 
@@ -1072,17 +1106,27 @@
             renderApps(filtered);
         }
 
-        // Öne çıkan slider için ilk uygulamayı göster
         function openFeaturedApp() {
             if (allApps.length > 0) {
                 openAppDetail(0);
             }
         }
 
-        // --- 3. ÖZELLİK: UYGULAMA DETAY MODALI (Görseldeki Tasarım) ---
+        // --- UYGULAMA DETAY VE EKRAN GÖRÜNTÜLERİ MODALI ---
         function openAppDetail(index) {
             const app = allApps[index];
             if (!app) return;
+
+            // Ekran görüntüleri dizisi varsa HTML oluştur
+            let screenshotsHtml = '';
+            if (app.screenshots && app.screenshots.length > 0) {
+                screenshotsHtml = `
+                    <div class="screenshots-title">Ekran Görüntüleri</div>
+                    <div class="screenshots-scroll">
+                        ${app.screenshots.map(img => `<img src="${img}" class="screenshot-item" onerror="this.style.display='none'">`).join('')}
+                    </div>
+                `;
+            }
 
             document.getElementById('modalTitle').innerText = "Uygulama Detayı";
             document.getElementById('modalBody').innerHTML = `
@@ -1113,6 +1157,8 @@
                     <strong>Açıklama:</strong><br>
                     ${app.description || 'Bu uygulama Bxasaran Store güvencesiyle yüksek performans ve güvenli kullanım için optimize edilmiştir.'}
                 </div>
+
+                ${screenshotsHtml}
 
                 <a href="${app.downloadUrl}" class="close-btn" style="background: linear-gradient(135deg, #1d4ed8, #3b82f6); margin-top: 20px;">Hemen İndir</a>
             `;
