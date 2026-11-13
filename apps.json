@@ -3,14 +3,26 @@
     "name": "Yakında Yayında",
     "category": "Tv & Medya",
     "version": "16.0",
+    "size": "25 MB",
+    "description": "Televizyon ve medya içeriklerini yüksek kalitede takip edebileceğiniz özel medya oynatıcı uygulaması.",
     "downloadUrl": "basaran_logo.png",
-    "iconUrl": "basaran_logo.png"
+    "iconUrl": "basaran_logo.png",
+    "screenshots": [
+      "basaran_logo.png",
+      "basaran_logo.png"
+    ]
   },
   {
     "name": "Yakında Yayında",
     "category": "Dosya Yöneticisi",
     "version": "Son Sürüm",
+    "size": "18 MB",
+    "description": "Cihazınızdaki dosyaları hızlı, güvenli ve düzenli bir şekilde yönetmenizi sağlayan gelişmiş dosya yöneticisi.",
     "downloadUrl": "basaran_logo.png",
-    "iconUrl": "basaran_logo.png"
+    "iconUrl": "basaran_logo.png",
+    "screenshots": [
+      "basaran_logo.png",
+      "basaran_logo.png"
+    ]
   }
 ]
