@@ -1,11 +1,11 @@
 [
   {
-    "name": "Yakında Yayında",
-    "category": "Yakında Yayında",
-    "version": "16.0",
-    "size": "25 MB",
-    "description": "Televizyon ve medya içeriklerini yüksek kalitede takip edebileceğiniz özel medya oynatıcı uygulaması.",
-    "downloadUrl": "basaran_logo.png",
+    "name": "Smart Light",
+    "category": "Araçlar",
+    "version": "v1.0",
+    "size": "4 MB",
+    "description": "Smart Light, flaş ışığını ve flaş hızını Android Hızlı Ayarlar (Quick Settings) paneli üzerinden hızlıca kontrol etmenizi sağlayan pratik bir el feneri uygulamasıdır..",
+    "downloadUrl": "App/",
     "iconUrl": "images/logo/app.logo",
     "screenshots": [
       "images/screenshots/ekran_goruntuleri.png"
