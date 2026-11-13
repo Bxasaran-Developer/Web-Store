@@ -34,7 +34,7 @@
         }
 
         /* =========================================================
-           1. EKRAN: NEON SPLASH & POLİTİKA MENÜSÜ
+           1. EKRAN: NEON SPLASH & POLİTİKALAR
            ========================================================= */
         #splashScreen {
             position: fixed;
@@ -178,7 +178,6 @@
             transform: translateX(4px);
         }
 
-        /* BUTON SİLİNDİ: Sadece Şık Metin ve Altında Ok Tasarımı */
         .bottom-drawer-handle {
             width: 100%;
             max-width: 440px;
@@ -243,7 +242,6 @@
             gap: 16px;
         }
 
-        /* Search Bar ve Yanındaki Şık Neon Çekmece Butonu */
         .search-row {
             display: flex;
             align-items: center;
@@ -291,14 +289,14 @@
             color: #71717a;
         }
 
-        /* Search Bar'ın Yanına Konan Şık Neon Buton */
+        /* --- 2 SANİYE BASILI TUTMA EFEKTİNE SAHİP ULTRA ŞIK NEON BUTON --- */
         .neon-side-btn {
-            --pull-progress: 0;
+            --hold-progress: 0;
             width: 50px;
             height: 50px;
             border-radius: 16px;
-            background: radial-gradient(circle at 30% 30%, #241b35, #0e0c14);
-            border: 1.5px solid rgba(192, 132, 252, calc(0.35 + var(--pull-progress) * 0.65));
+            background: radial-gradient(circle at 30% 30%, #2b1f3d, #0e0c14);
+            border: 2px solid rgba(192, 132, 252, calc(0.4 + var(--hold-progress) * 0.6));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -306,22 +304,51 @@
             user-select: none;
             flex-shrink: 0;
             position: relative;
+            overflow: hidden;
             box-shadow: 
                 0 6px 20px rgba(0, 0, 0, 0.5),
-                0 0 calc(8px + var(--pull-progress) * 25px) rgba(168, 85, 247, calc(0.3 + var(--pull-progress) * 0.7));
-            transition: transform 0.2s ease, border-color 0.2s ease;
+                0 0 calc(10px + var(--hold-progress) * 30px) rgba(168, 85, 247, calc(0.4 + var(--hold-progress) * 0.6));
+            transition: transform 0.2s ease;
         }
 
-        .neon-side-btn:active {
-            transform: scale(0.94);
+        .neon-side-btn.holding {
+            transform: scale(0.95);
+        }
+
+        /* Basılı Tutunca İçini ve Etrafını Saran Neon Mor Dolum Efekti */
+        .neon-side-btn::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 18px;
+            background: conic-gradient(
+                #e879f9 calc(var(--hold-progress) * 360deg),
+                transparent 0deg
+            );
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff calc(100% - 3.5px));
+            mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff calc(100% - 3.5px));
+            pointer-events: none;
+            filter: drop-shadow(0 0 8px #c084fc);
+        }
+
+        /* İç Arka Plan Dolgu Efekti */
+        .neon-side-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(168, 85, 247, calc(var(--hold-progress) * 0.35));
+            pointer-events: none;
+            transition: background 0.1s ease;
         }
 
         .neon-side-btn svg {
             width: 22px;
             height: 22px;
             stroke: #f3e8ff;
-            transform: rotate(180deg); /* Menüye dönüş oku */
-            filter: drop-shadow(0 0 6px rgba(232, 121, 249, 0.8));
+            transform: rotate(180deg);
+            filter: drop-shadow(0 0 6px rgba(232, 121, 249, 0.9));
+            position: relative;
+            z-index: 2;
         }
 
         .section-header {
@@ -575,7 +602,6 @@
             </button>
         </div>
 
-        <!-- Sadece Metin ve Altında Ok Tasarımı (Buton silindi) -->
         <div class="bottom-drawer-handle" id="bottomDrawerHandle">
             <div class="bottom-drawer-text">Uygulamalar için yukarı kaydırın</div>
             <svg class="bottom-drawer-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -587,7 +613,6 @@
     <!-- 2. EKRAN: BAĞIMSIZ MAĞAZA EKRANI -->
     <div id="storeScreen">
         <div class="container">
-            <!-- Search Bar ve Yanında Şık Neon Menü Butonu -->
             <div class="search-row">
                 <div class="search-container">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -596,7 +621,8 @@
                     </svg>
                     <input type="text" id="searchInput" class="search-input" placeholder="Uygulama ara..." onkeyup="filterApps()">
                 </div>
-                <div class="neon-side-btn" id="sideMenuBtn" onclick="returnToSplash()" title="Ana Menüye Dön">
+                <!-- 2 Saniye Basılı Tutma Özellikli Şık Neon Buton -->
+                <div class="neon-side-btn" id="sideMenuBtn" title="Ana Menüye Dönmek için 2 saniye basılı tutun">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
@@ -627,6 +653,7 @@
         const splash = document.getElementById('splashScreen');
         const storeScreen = document.getElementById('storeScreen');
         const bottomDrawer = document.getElementById('bottomDrawerHandle');
+        const sideMenuBtn = document.getElementById('sideMenuBtn');
 
         // Sayfa açıldığında hafızadaki durumu kontrol et
         window.addEventListener('DOMContentLoaded', () => {
@@ -651,6 +678,49 @@
                 storeScreen.scrollTop = 0;
             }, 300);
         }
+
+        // --- 2 SANİYE BASILI TUTMA MANTIĞI (LONG PRESS) ---
+        let holdTimer = null;
+        let animationFrame = null;
+        let startTime = null;
+        const holdDuration = 2000; // 2 Saniye
+
+        function startHolding(e) {
+            e.preventDefault();
+            sideMenuBtn.classList.add('holding');
+            startTime = performance.now();
+
+            function updateProgress(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(1, elapsed / holdDuration);
+                sideMenuBtn.style.setProperty('--hold-progress', progress.toFixed(3));
+
+                if (progress < 1) {
+                    animationFrame = requestAnimationFrame(updateProgress);
+                } else {
+                    // 2 saniye doldu -> 1. menüye dön ve sıfırla
+                    cancelHolding();
+                    returnToSplash();
+                }
+            }
+
+            animationFrame = requestAnimationFrame(updateProgress);
+        }
+
+        function cancelHolding() {
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+            sideMenuBtn.classList.remove('holding');
+            sideMenuBtn.style.setProperty('--hold-progress', '0');
+        }
+
+        // Dokunmatik ve Fare olay bağlamaları
+        sideMenuBtn.addEventListener('touchstart', startHolding, { passive: false });
+        sideMenuBtn.addEventListener('touchend', cancelHolding);
+        sideMenuBtn.addEventListener('touchcancel', cancelHolding);
+
+        sideMenuBtn.addEventListener('mousedown', startHolding);
+        sideMenuBtn.addEventListener('mouseup', cancelHolding);
+        sideMenuBtn.addEventListener('mouseleave', cancelHolding);
 
         // 1. Ekranda alt kısmı yukarı kaydırınca mağazayı aç
         let drawerStartY = 0;
@@ -778,7 +848,7 @@
                 Servisimizi kullandığınız zaman, uygulamada teknik bir hata oluştuğunda cihazınızda 'Log Verisi' adı altında teknik analiz verilerinin (üçüncü parti hata takip ürünleri aracılığıyla) toplanabileceğini bilmenizi isteriz. Bu Günlük Verileri; cihazınızın İnternet Protokolü ("IP") adresi, cihaz modeli, Android işletim sistemi sürümü, uygulama yapılandırması, kullanım zamanı ve tarihi gibi yalnızca hata ayıklamaya yönelik istatistikleri içerebilir. Ayrıca kötüye kullanımı ve modifikasyon girişimlerini önlemek amacıyla uygulama bütünlük doğrulamaları kullanılabilir.
 
                 <h4>4. Çerezler (Cookies)</h4>
-                Çerezler, genellikle anonim benzersiz tanımlayıcılar olarak kullanılan az miktarda veri içeren dosyalardır. Bu Servis doğrudan çerez kullanmaz; ancak uygulamalarımız ve web sitemiz, reklam gösterimi veya performans iyileştirmesi için çerezleri kullanan üçüncü parti kod ve kütüphaneleri barındırabilir. Tarayıcı veya cihaz ayarlarınızdan çerezleri reddetme seçeneğine sahipsiniz.
+                Çerezler, genellikle anonim benzersiz tanımlayıcılar olarak kullanılan az miktarda veri içeren dosyalardır. Этот Servis doğrudan çerez kullanmaz; ancak uygulamalarımız ve web sitemiz, reklam gösterimi veya performans iyileştirmesi için çerezleri kullanan üçüncü parti kod ve kütüphaneleri barındırabilir. Tarayıcı veya cihaz ayarlarınızdan çerezleri reddetme seçeneğine sahipsiniz.
 
                 <h4>5. Servis Sağlayıcıları</h4>
                 Hizmetimizi kolaylaştırmak, uygulama performansını analiz etmek veya standart reklam gösterimlerini sağlamak amacıyla güvenilir üçüncü parti altyapılarla çalışabiliriz. Bu servis sağlayıcıları yalnızca kendilerine verilen teknik görevleri yerine getirmek amacıyla anonim verilere erişebilir ve bilgileri başka bir amaçla kullanmamakla yükümlüdür.
