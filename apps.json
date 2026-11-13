@@ -5,12 +5,12 @@
     "version": "v1.0",
     "size": "4 MB",
     "description": "Smart Light, flaş ışığını ve flaş hızını Android Hızlı Ayarlar (Quick Settings) paneli üzerinden hızlıca kontrol etmenizi sağlayan pratik bir el feneri uygulamasıdır..",
-    "downloadUrl": "App/",
-    "iconUrl": "images/logo/app.logo",
+    "downloadUrl": "App/Smart_Light.v1.0.apk",
+    "iconUrl": "images/Smart_Light.v1.0.png",
     "screenshots": [
-      "images/screenshots/ekran_goruntuleri.png"
+      "images/screenshots/null"
     ],
-    "featured": false
+    "featured": true
   },
   {
     "name": "Yakında Yayında",
@@ -36,6 +36,6 @@
     "screenshots": [
       "images/screenshots/ekran_goruntuleri.png"
     ],
-    "featured": true
+    "featured": false
   }
 ]
