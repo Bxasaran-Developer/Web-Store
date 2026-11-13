@@ -13,47 +13,70 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Özel Modern Kaydırma Çubuğu */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: #070709;
+            background: #060608;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(200, 130, 214, 0.3);
+            background: rgba(192, 132, 252, 0.35);
             border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(200, 130, 214, 0.6);
         }
 
         body {
-            background-color: #070709;
-            background-image: 
-                radial-gradient(circle at 50% -10%, rgba(168, 85, 247, 0.22), transparent 45%),
-                radial-gradient(circle at 85% 40%, rgba(56, 239, 125, 0.08), transparent 40%),
-                radial-gradient(circle at 15% 80%, rgba(14, 165, 233, 0.08), transparent 40%);
+            background-color: #060608;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* --- İLK AÇILIŞ (SPLASH) EKRANI & ULTRA MODERN LOGO --- */
+        /* --- 1. EKRAN: AKICI NEON SPLASH & POLİTİKALAR --- */
         #splashScreen {
             position: fixed;
             inset: 0;
-            background: rgba(7, 7, 9, 0.96);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 9999;
+            background: #060608;
+            z-index: 900;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 25px 16px;
-            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
+            padding: 36px 18px 28px;
+            overflow: hidden;
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+        }
+
+        /* Akıcı Neon Arka Plan Hareketi */
+        #splashScreen::before,
+        #splashScreen::after {
+            content: '';
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: -1;
+            pointer-events: none;
+            animation: neonDrift 8s ease-in-out infinite alternate;
+        }
+
+        #splashScreen::before {
+            background: rgba(168, 85, 247, 0.28);
+            top: -80px;
+            left: -60px;
+        }
+
+        #splashScreen::after {
+            background: rgba(56, 239, 125, 0.16);
+            bottom: -80px;
+            right: -60px;
+            animation-delay: -4s;
+        }
+
+        @keyframes neonDrift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(35px, 45px) scale(1.15); }
         }
 
         #splashScreen.slide-up {
@@ -62,194 +85,140 @@
             pointer-events: none;
         }
 
-        .splash-top {
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        .splash-header {
+            text-align: center;
+            margin-top: 10px;
         }
 
-        .brand-logo-text {
+        .brand-neon-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.35rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff, #a1a1aa);
+            font-size: 1.65rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #e879f9, #a855f7, #38ef7d, #e879f9);
+            background-size: 250% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
+            animation: neonTextFlow 5s linear infinite;
+            filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.45));
         }
 
-        .splash-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 16px;
-            width: 100%;
-            max-width: 480px;
-        }
-
-        /* ULTRA ŞIK & MODERN DÖNEN GEZEGEN LOGO EFEKTİ */
-        .splash-globe-container {
-            width: 160px;
-            height: 160px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            filter: drop-shadow(0 0 20px rgba(200, 130, 214, 0.35));
-        }
-
-        .splash-logo-img {
-            width: 105px;
-            height: 105px;
-            object-fit: contain;
-            border-radius: 50%;
-            z-index: 2;
-            position: relative;
-            animation: floatLogo 4s ease-in-out infinite;
-        }
-
-        @keyframes floatLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        /* Çok Katmanlı Modern Neon Yörünge */
-        .orbit-ring {
-            position: absolute;
-            inset: 0;
-            border: 2px solid transparent;
-            border-top-color: #c882d6;
-            border-bottom-color: #38ef7d;
-            border-radius: 50%;
-            animation: rotateOrbit 6s linear infinite;
-            z-index: 1;
-        }
-
-        .orbit-ring-glow {
-            position: absolute;
-            inset: -6px;
-            border: 1px dashed rgba(200, 130, 214, 0.35);
-            border-radius: 50%;
-            animation: rotateOrbitReverse 12s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes rotateOrbit {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes rotateOrbitReverse {
-            from { transform: rotate(360deg); }
-            to { transform: rotate(0deg); }
+        @keyframes neonTextFlow {
+            to { background-position: 250% center; }
         }
 
         .splash-subtitle {
             font-size: 0.88rem;
             color: #a1a1aa;
+            margin-top: 8px;
             max-width: 280px;
-            line-height: 1.4;
-            font-weight: 400;
+            line-height: 1.45;
         }
 
-        /* Glassmorphism Politika Butonları */
+        /* Orta Kısım: Neon Politika Kartları (Logosuz) */
         .splash-nav {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
+            margin: auto 0;
         }
 
         .splash-pill {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 12px 16px;
-            color: #e4e4e7;
+            position: relative;
+            background: rgba(18, 18, 24, 0.72);
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            border-radius: 16px;
+            padding: 15px 18px;
+            color: #f4f4f5;
             font-family: 'Inter', sans-serif;
-            font-size: 0.84rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            justify-content: space-between;
+            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 0 12px rgba(168, 85, 247, 0.05);
         }
 
-        .splash-pill svg {
-            width: 18px;
-            height: 18px;
-            stroke: #c882d6;
+        .pill-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .splash-pill svg.pill-icon {
+            width: 20px;
+            height: 20px;
+            stroke: #c084fc;
+            filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.6));
             flex-shrink: 0;
-            transition: transform 0.2s ease;
         }
 
-        .splash-pill:hover {
-            background: rgba(200, 130, 214, 0.12);
-            border-color: rgba(200, 130, 214, 0.4);
-            color: #ffffff;
+        .splash-pill svg.pill-arrow {
+            width: 16px;
+            height: 16px;
+            stroke: #71717a;
+            transition: transform 0.25s ease, stroke 0.25s ease;
+        }
+
+        .splash-pill:hover, .splash-pill:active {
+            background: rgba(168, 85, 247, 0.14);
+            border-color: #c084fc;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(200, 130, 214, 0.15);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25);
         }
 
-        .splash-pill:hover svg {
-            transform: scale(1.1);
+        .splash-pill:hover svg.pill-arrow {
+            stroke: #e879f9;
+            transform: translateX(3px);
         }
 
         .splash-bottom {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
         }
 
         .more-btn {
-            background: linear-gradient(135deg, #9c4dcc, #c882d6);
+            background: linear-gradient(135deg, #9333ea, #c084fc);
             border: none;
             color: #09090b;
-            padding: 12px 32px;
-            border-radius: 14px;
+            padding: 13px 36px;
+            border-radius: 16px;
             font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             cursor: pointer;
             transition: all 0.25s ease;
-            box-shadow: 0 4px 20px rgba(200, 130, 214, 0.35);
+            box-shadow: 0 0 24px rgba(168, 85, 247, 0.45);
         }
 
-        .more-btn:hover {
-            opacity: 0.95;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(200, 130, 214, 0.5);
+        .more-btn:active {
+            transform: scale(0.96);
         }
 
-        .bounce-arrow {
-            width: 20px;
-            height: 20px;
-            stroke: #c882d6;
-            animation: bounce 2s infinite;
+        .swipe-hint {
+            font-size: 0.72rem;
+            color: #71717a;
+            letter-spacing: 0.4px;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-5px); }
-            60% { transform: translateY(-2px); }
-        }
-
-        /* --- ANA UYGULAMA MAĞAZASI İÇERİĞİ --- */
+        /* --- 2. EKRAN: SADECE SEARCH, UYGULAMALAR VE ÖZEL TUTAMAÇ --- */
         .main-wrapper {
             width: 100%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 24px 16px 40px;
+            padding: 14px 16px 40px;
+            background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.14), transparent 50%);
         }
 
         .container {
@@ -257,65 +226,87 @@
             max-width: 480px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
         }
 
-        header {
+        /* Üstteki Sadece Tutulup Aşağı Çekilebilen > Butonu */
+        .pull-handle-zone {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4px 0 6px;
+        }
+
+        .pull-btn {
+            --pull-progress: 0;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(20, 20, 26, 0.9);
+            border: 2px solid rgba(192, 132, 252, calc(0.25 + var(--pull-progress) * 0.75));
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 22px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+            position: relative;
+            box-shadow: 
+                0 0 calc(var(--pull-progress) * 28px) rgba(168, 85, 247, calc(0.2 + var(--pull-progress) * 0.8)),
+                inset 0 0 calc(var(--pull-progress) * 18px) rgba(168, 85, 247, calc(var(--pull-progress) * 0.85));
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s ease;
         }
 
-        .brand-logo-text-main {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.35rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff, #a1a1aa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
+        .pull-btn.dragging {
+            transition: none;
+            cursor: grabbing;
         }
 
-        .mini-emblem {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            filter: drop-shadow(0 0 10px rgba(56, 239, 125, 0.4));
+        /* Çektikçe Etrafını Kaplayan Mor Dairesel Halka */
+        .pull-btn::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #a855f7 calc(var(--pull-progress) * 360deg),
+                transparent 0deg
+            );
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), #fff calc(100% - 3px));
+            mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), #fff calc(100% - 3px));
+            pointer-events: none;
+        }
+
+        .pull-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #e9d5ff;
+            transform: rotate(90deg); /* > ikonunu aşağı yönlü ok yapar */
+            transition: transform 0.2s ease;
         }
 
         .search-container {
             display: flex;
             align-items: center;
-            background: rgba(22, 22, 28, 0.75);
-            border: 1px solid rgba(200, 130, 214, 0.2);
+            background: rgba(20, 20, 26, 0.85);
+            border: 1px solid rgba(192, 132, 252, 0.25);
             border-radius: 16px;
             padding: 12px 16px;
             gap: 12px;
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .search-container:focus-within {
-            border-color: rgba(200, 130, 214, 0.6);
-            box-shadow: 0 0 20px rgba(200, 130, 214, 0.2);
+            border-color: #c084fc;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
         }
 
         .search-container svg {
             width: 18px;
             height: 18px;
-            stroke: #c882d6;
+            stroke: #c084fc;
             flex-shrink: 0;
         }
 
@@ -337,7 +328,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: -4px;
             padding: 0 4px;
         }
 
@@ -351,7 +341,7 @@
             font-size: 0.75rem;
             color: #a1a1aa;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 4px 10px;
             border-radius: 20px;
         }
@@ -359,29 +349,28 @@
         .apps-list {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .modern-app-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(22, 22, 28, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(20, 20, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 20px;
-            padding: 16px;
+            padding: 14px;
             text-decoration: none;
             color: #ffffff;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s ease;
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
         }
 
         .modern-app-card:hover {
-            background: rgba(30, 30, 38, 0.85);
-            border-color: rgba(200, 130, 214, 0.4);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 130, 214, 0.1);
+            background: rgba(28, 28, 36, 0.9);
+            border-color: rgba(192, 132, 252, 0.45);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
         }
 
         .app-left {
@@ -391,13 +380,12 @@
         }
 
         .app-icon {
-            width: 58px;
-            height: 58px;
-            border-radius: 16px;
+            width: 56px;
+            height: 56px;
+            border-radius: 15px;
             object-fit: cover;
             border: 1px solid rgba(255, 255, 255, 0.08);
             background: #121212;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .app-info {
@@ -407,7 +395,7 @@
         }
 
         .app-name {
-            font-size: 1rem;
+            font-size: 0.98rem;
             font-weight: 700;
             color: #ffffff;
         }
@@ -416,7 +404,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             color: #a1a1aa;
         }
 
@@ -424,39 +412,30 @@
             color: #4ade80;
             background: rgba(74, 222, 128, 0.12);
             border: 1px solid rgba(74, 222, 128, 0.2);
-            padding: 2px 8px;
+            padding: 2px 7px;
             border-radius: 6px;
             font-weight: 600;
             font-size: 0.68rem;
         }
 
         .download-pill {
-            background: linear-gradient(135deg, #9c4dcc, #c882d6);
+            background: linear-gradient(135deg, #9333ea, #c084fc);
             color: #09090b;
             font-weight: 700;
             font-size: 0.8rem;
-            padding: 10px 18px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 15px rgba(200, 130, 214, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .modern-app-card:hover .download-pill {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(200, 130, 214, 0.5);
+            padding: 9px 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35);
         }
 
         .no-result {
             text-align: center;
             color: #71717a;
-            font-size: 0.88rem;
-            padding: 30px 0;
+            font-size: 0.86rem;
+            padding: 28px 0;
         }
 
-        /* --- MODAL PENCERE ANİMASYONLARI (FADE & ZOOM) --- */
+        /* --- ANİMASYONLU MODAL PENCERE (SPLASH ÜSTÜNDE) --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -467,11 +446,10 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            z-index: 1000;
-            
+            z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity 0.28s ease, visibility 0.28s ease;
         }
 
         .modal-overlay.active {
@@ -480,9 +458,9 @@
         }
 
         .modal-box {
-            background: #111115;
-            border: 1px solid rgba(200, 130, 214, 0.4);
-            box-shadow: 0 0 40px rgba(200, 130, 214, 0.25), 0 20px 40px rgba(0,0,0,0.6);
+            background: #101014;
+            border: 1px solid rgba(192, 132, 252, 0.45);
+            box-shadow: 0 0 35px rgba(168, 85, 247, 0.3);
             border-radius: 22px;
             max-width: 460px;
             width: 100%;
@@ -490,9 +468,8 @@
             color: #e4e4e7;
             max-height: 85vh;
             overflow-y: auto;
-            
-            transform: scale(0.85) translateY(20px);
-            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.88) translateY(18px);
+            transition: transform 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .modal-overlay.active .modal-box {
@@ -500,9 +477,9 @@
         }
 
         .modal-title {
-            font-size: 1.15rem;
+            font-size: 1.12rem;
             font-weight: 700;
-            color: #e5a9f2;
+            color: #e9d5ff;
             margin-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 10px;
@@ -519,10 +496,10 @@
         }
 
         .modal-content h4 {
-            color: #e5a9f2;
+            color: #d8b4fe;
             margin-top: 14px;
             margin-bottom: 4px;
-            font-size: 0.95rem;
+            font-size: 0.94rem;
         }
 
         .modal-content ul {
@@ -537,93 +514,81 @@
             padding: 12px;
             border-radius: 12px;
             border: none;
-            background: linear-gradient(90deg, #9c4dcc, #c882d6);
+            background: linear-gradient(90deg, #9333ea, #c084fc);
             color: #000;
             font-weight: 700;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: opacity 0.2s ease, transform 0.2s ease;
-            box-shadow: 0 4px 15px rgba(200, 130, 214, 0.3);
-        }
-
-        .close-btn:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
         }
     </style>
 </head>
 <body>
 
-    <!-- İLK AÇILIŞ SPLASH EKRANI -->
+    <!-- 1. GÖRSEL: AKICI NEON SPLASH & POLİTİKA MENÜSÜ -->
     <div id="splashScreen">
-        <div class="splash-top">
-            <span class="brand-logo-text">Bxasaran Store</span>
+        <div class="splash-header">
+            <div class="brand-neon-title">Bxasaran Store</div>
+            <div class="splash-subtitle">Sana en güvenli ve modern uygulamaları getiriyoruz</div>
         </div>
 
-        <div class="splash-center">
-            <!-- Modern Çift Katmanlı Dönen Yörünge ve Logo Alanı -->
-            <div class="splash-globe-container">
-                <div class="orbit-ring-glow"></div>
-                <div class="orbit-ring"></div>
-                <img src="splash_logo.png" alt="Bxasaran Logo" class="splash-logo-img" onerror="this.style.display='none'">
-            </div>
-            
-            <div class="splash-subtitle">Sana en güvenli ve modern uygulamaları getiriyoruz</div>
-
-            <!-- Politika Butonları -->
-            <div class="splash-nav">
-                <button class="splash-pill" onclick="openModal('guvenlik')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="splash-nav">
+            <button class="splash-pill" onclick="openModal('guvenlik')">
+                <div class="pill-left">
+                    <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                     <span>Güvenliğiniz İçin</span>
-                </button>
-                <button class="splash-pill" onclick="openModal('gizlilik')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                </div>
+                <svg class="pill-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <button class="splash-pill" onclick="openModal('gizlilik')">
+                <div class="pill-left">
+                    <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                     </svg>
                     <span>Gizlilik Politikamız</span>
-                </button>
-                <button class="splash-pill" onclick="openModal('hakkimizda')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                </div>
+                <svg class="pill-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <button class="splash-pill" onclick="openModal('hakkimizda')">
+                <div class="pill-left">
+                    <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/>
                         <line x1="12" y1="16" x2="12" y2="12"/>
                         <line x1="12" y1="8" x2="12.01" y2="8"/>
                     </svg>
                     <span>Hakkımızda & Gelir Politikası</span>
-                </button>
-            </div>
+                </div>
+                <svg class="pill-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
         </div>
 
         <div class="splash-bottom">
             <button class="more-btn" onclick="enterStore()">Uygulamaları Gör</button>
-            <svg class="bounce-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" onclick="enterStore()" style="cursor: pointer;">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+            <span class="swipe-hint">veya mağaza için yukarı kaydırın</span>
         </div>
     </div>
 
-    <!-- ANA UYGULAMA MAĞAZASI İÇERİĞİ -->
+    <!-- 2. GÖRSEL: SADECE TUTAMAÇ BUTON, SEARCH VE UYGULAMALAR -->
     <div class="main-wrapper">
         <div class="container">
-            <header>
-                <span class="brand-logo-text-main">Bxasaran</span>
-                <div class="mini-emblem">
-                    <svg viewBox="0 0 100 100" width="30" height="30">
-                        <defs>
-                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#38ef7d" />
-                                <stop offset="50%" stop-color="#11998e" />
-                                <stop offset="100%" stop-color="#0575E6" />
-                            </linearGradient>
-                        </defs>
-                        <polygon points="50,10 92,85 8,85" fill="#1e2229" />
-                        <polygon points="50,10 88,80 74,80 50,34 26,80 70,80 65,70 40,70 50,50" fill="url(#logoGrad)" />
+            <!-- Sadece bu > butonu tutulup aşağı çekildiğinde mor dolar ve 1. ekrana döner -->
+            <div class="pull-handle-zone">
+                <div class="pull-btn" id="pullHandleBtn" title="Menüye dönmek için aşağı çekin">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </div>
-                <span class="brand-logo-text-main">store</span>
-            </header>
+            </div>
 
             <div class="search-container">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -644,7 +609,7 @@
         </div>
     </div>
 
-    <!-- ANİMASYONLU MODAL PENCERE YAPISI -->
+    <!-- POLİTİKA MODAL PENCERESİ -->
     <div class="modal-overlay" id="infoModal" onclick="closeModalOnBg(event)">
         <div class="modal-box">
             <h3 class="modal-title" id="modalTitle">Başlık</h3>
@@ -654,25 +619,106 @@
     </div>
 
     <script>
+        const splash = document.getElementById('splashScreen');
+        const pullBtn = document.getElementById('pullHandleBtn');
+
         function enterStore() {
-            const splash = document.getElementById('splashScreen');
             splash.classList.add('slide-up');
         }
 
-        let touchstartY = 0;
-        let touchendY = 0;
+        function returnToSplash() {
+            splash.classList.remove('slide-up');
+        }
 
-        document.getElementById('splashScreen').addEventListener('touchstart', e => {
-            touchstartY = e.changedTouches[0].screenY;
-        }, false);
+        // 1. Ekranda yukarı kaydırma (Swipe Up) ile mağazayı açma
+        let splashTouchStartY = 0;
+        splash.addEventListener('touchstart', e => {
+            splashTouchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
 
-        document.getElementById('splashScreen').addEventListener('touchend', e => {
-            touchendY = e.changedTouches[0].screenY;
-            if (touchendY < touchstartY - 50) {
+        splash.addEventListener('touchend', e => {
+            const splashTouchEndY = e.changedTouches[0].screenY;
+            if (splashTouchEndY < splashTouchStartY - 55) {
                 enterStore();
             }
-        }, false);
+        }, { passive: true });
 
+        // 2. Ekranda SADECE > butonunu tutup aşağı çekince mor dolma ve 1. menüye dönme
+        let isPulling = false;
+        let pullStartY = 0;
+        const maxPullDistance = 120; // Tam dolum için gereken piksel mesafesi
+
+        function startPull(clientY) {
+            isPulling = true;
+            pullStartY = clientY;
+            pullBtn.classList.add('dragging');
+        }
+
+        function movePull(clientY) {
+            if (!isPulling) return;
+            const deltaY = Math.max(0, clientY - pullStartY);
+            const progress = Math.min(1, deltaY / maxPullDistance);
+            const visualTranslate = Math.min(deltaY * 0.55, 70);
+
+            pullBtn.style.setProperty('--pull-progress', progress.toFixed(3));
+            pullBtn.style.transform = `translateY(${visualTranslate}px) scale(${1 + progress * 0.12})`;
+        }
+
+        function endPull(clientY) {
+            if (!isPulling) return;
+            isPulling = false;
+            pullBtn.classList.remove('dragging');
+
+            const deltaY = Math.max(0, clientY - pullStartY);
+            const progress = Math.min(1, deltaY / maxPullDistance);
+
+            // Butonu eski yerine yumuşakça sıfırla
+            pullBtn.style.setProperty('--pull-progress', '0');
+            pullBtn.style.transform = 'translateY(0) scale(1)';
+
+            // Yeterince çekildiyse 1. görseldeki menüye geri dön
+            if (progress >= 0.85) {
+                returnToSplash();
+            }
+        }
+
+        // Dokunmatik (Mobil) olayları - sadece pullBtn üzerinde aktif
+        pullBtn.addEventListener('touchstart', e => {
+            e.stopPropagation();
+            startPull(e.touches[0].clientY);
+        }, { passive: true });
+
+        window.addEventListener('touchmove', e => {
+            if (isPulling) {
+                movePull(e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchend', e => {
+            if (isPulling) {
+                endPull(e.changedTouches[0].clientY);
+            }
+        });
+
+        // Fare (Bilgisayar) desteği - sadece pullBtn üzerinde aktif
+        pullBtn.addEventListener('mousedown', e => {
+            e.preventDefault();
+            startPull(e.clientY);
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (isPulling) {
+                movePull(e.clientY);
+            }
+        });
+
+        window.addEventListener('mouseup', e => {
+            if (isPulling) {
+                endPull(e.clientY);
+            }
+        });
+
+        // --- UYGULAMALARI YÜKLEME VE ARAMA ---
         let allApps = [];
 
         async function fetchApps() {
@@ -723,6 +769,7 @@
 
         window.onload = fetchApps;
 
+        // --- POLİTİKA MODALLARI ---
         const modalData = {
             guvenlik: {
                 title: "Güvenliğiniz İçin Yalnızca Sitemizden İndirin!",
