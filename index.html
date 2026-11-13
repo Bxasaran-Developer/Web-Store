@@ -34,9 +34,7 @@
             border-radius: 10px;
         }
 
-        /* =========================================================
-           1. EKRAN: UZAY MAVİSİ SPLASH & POLİTİKALAR
-           ========================================================= */
+        /* 1. EKRAN: SPLASH & POLİTİKALAR */
         #splashScreen {
             position: fixed;
             inset: 0;
@@ -215,9 +213,7 @@
             60% { transform: translateY(-2px); }
         }
 
-        /* =========================================================
-           2. EKRAN: UZAY MAVİSİ BAĞIMSIZ MAĞAZA EKRANI
-           ========================================================= */
+        /* 2. EKRAN: MAĞAZA EKRANI */
         #storeScreen {
             position: fixed;
             inset: 0;
@@ -290,7 +286,7 @@
             color: #64748b;
         }
 
-        /* 0.5 Saniye Basılı Tutma Özellikli Uzay Mavisi Buton */
+        /* 0.5 Saniye Basılı Tutma Butonu */
         .neon-side-btn {
             --hold-progress: 0;
             width: 50px;
@@ -350,7 +346,7 @@
             z-index: 2;
         }
 
-        /* ÖNE ÇIKANLAR SLIDER */
+        /* DİNAMİK ÖNE ÇIKANLAR SLIDER (JSON BAĞLI) */
         .featured-slider {
             width: 100%;
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(15, 23, 42, 0.9));
@@ -365,6 +361,7 @@
             box-shadow: 0 8px 24px rgba(3, 7, 18, 0.5);
             position: relative;
             overflow: hidden;
+            display: none; /* Varsayılan gizli, JSON'da featured:true olunca açılır */
         }
 
         .featured-slider::before {
@@ -422,7 +419,7 @@
             transform: scale(0.94);
         }
 
-        /* DİNAMİK KATEGORİ SEKMELERİ */
+        /* KATEGORİ SEKMELERİ */
         .categories-scroll {
             display: flex;
             gap: 8px;
@@ -597,7 +594,7 @@
             opacity: 1;
         }
 
-        /* MODAL VE UYGULAMA DETAY PENCERESİ */
+        /* MODAL VE DETAY PENCERESİ */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -653,24 +650,6 @@
             color: #cbd5e1;
         }
 
-        .modal-content strong {
-            color: #ffffff;
-        }
-
-        .modal-content h4 {
-            color: #93c5fd;
-            margin-top: 14px;
-            margin-bottom: 4px;
-            font-size: 0.94rem;
-        }
-
-        .modal-content ul {
-            padding-left: 18px;
-            margin-top: 4px;
-            margin-bottom: 8px;
-        }
-
-        /* Uygulama Detay Modal İçeriği */
         .app-detail-header {
             display: flex;
             align-items: center;
@@ -734,7 +713,6 @@
             margin: 14px 0;
         }
 
-        /* EKRAN GÖRÜNTÜLERİ GALERİ ALANI */
         .screenshots-title {
             font-size: 0.85rem;
             font-weight: 700;
@@ -758,7 +736,6 @@
             border: 1px solid rgba(59, 130, 246, 0.3);
             background: #030712;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(3, 7, 18, 0.5);
         }
 
         .close-btn {
@@ -781,7 +758,7 @@
 </head>
 <body>
 
-    <!-- 1. EKRAN: UZAY MAVİSİ SPLASH & POLİTİKALAR -->
+    <!-- 1. EKRAN: SPLASH & POLİTİKALAR -->
     <div id="splashScreen">
         <div class="splash-header">
             <div class="brand-neon-title">Bxasaran Store</div>
@@ -837,7 +814,7 @@
         </div>
     </div>
 
-    <!-- 2. EKRAN: UZAY MAVİSİ BAĞIMSIZ MAĞAZA EKRANI -->
+    <!-- 2. EKRAN: MAĞAZA EKRANI -->
     <div id="storeScreen">
         <div class="container">
             <div class="search-row">
@@ -855,17 +832,17 @@
                 </div>
             </div>
 
-            <!-- ÖNE ÇIKANLAR SLIDER -->
+            <!-- DİNAMİK ÖNE ÇIKANLAR SLIDER (JSON'A BAĞLI) -->
             <div class="featured-slider" id="featuredSlider">
                 <div class="featured-content">
                     <span class="featured-badge">Öne Çıkan</span>
-                    <div class="featured-title">Bxasaran Store v2.0</div>
-                    <div class="featured-desc">En güvenli ve güncel araçları keşfedin.</div>
+                    <div class="featured-title" id="featuredTitle">Uygulama Adı</div>
+                    <div class="featured-desc" id="featuredDesc">Açıklama</div>
                 </div>
-                <button class="featured-btn" onclick="openFeaturedApp()">İncele</button>
+                <button class="featured-btn" id="featuredBtnBtn">İncele</button>
             </div>
 
-            <!-- DİNAMİK KATEGORİ SEKMELERİ (Otomatik Oluşur) -->
+            <!-- DİNAMİK KATEGORİ SEKMELERİ -->
             <div class="categories-scroll" id="categoriesScroll">
                 <div class="cat-chip active" onclick="filterByCategory('Tümü', this)">Tümü</div>
             </div>
@@ -884,7 +861,7 @@
     <!-- TOAST BİLDİRİMİ -->
     <div class="toast-notification" id="toastMsg">Ana menüye dönmek için butona basılı tutun!</div>
 
-    <!-- UYGULAMA DETAY SAYFASI / EKRAN GÖRÜNTÜLERİ MODALI -->
+    <!-- UYGULAMA DETAY MODALI -->
     <div class="modal-overlay" id="infoModal" onclick="closeModalOnBg(event)">
         <div class="modal-box">
             <h3 class="modal-title" id="modalTitle">Başlık</h3>
@@ -923,7 +900,7 @@
             }, 300);
         }
 
-        // --- 0.5 SANİYE BASILI TUTMA VE ÇİFT TIKLAMA MANTIĞI ---
+        // 0.5 SANİYE BASILI TUTMA MANTIĞI
         let animationFrame = null;
         let startTime = null;
         const holdDuration = 500;
@@ -983,7 +960,7 @@
         sideMenuBtn.addEventListener('mouseup', cancelHolding);
         sideMenuBtn.addEventListener('mouseleave', cancelHolding);
 
-        // 1. Ekranda alt kısmı yukarı kaydırınca mağazayı aç
+        // Alt Çekmece Kaydırma
         let drawerStartY = 0;
         let isDrawerDragging = false;
 
@@ -1033,7 +1010,7 @@
             }
         });
 
-        // --- UYGULAMALAR VE DİNAMİK KATEGORİ OLUŞTURMA ---
+        // UYGULAMALAR VE ÖNE ÇIKAN YÖNETİMİ
         let allApps = [];
         let currentCategory = 'Tümü';
 
@@ -1042,6 +1019,7 @@
                 const response = await fetch('apps.json');
                 allApps = await response.json();
                 buildCategories();
+                renderFeatured();
                 renderApps(allApps);
             } catch (error) {
                 console.error("Uygulamalar yüklenirken hata oluştu:", error);
@@ -1051,12 +1029,27 @@
 
         function buildCategories() {
             const categoriesScroll = document.getElementById('categoriesScroll');
-            // Benzersiz kategorileri bul
             const categories = ['Tümü', ...new Set(allApps.map(app => app.category).filter(Boolean))];
 
             categoriesScroll.innerHTML = categories.map((cat, idx) => `
                 <div class="cat-chip ${idx === 0 ? 'active' : ''}" onclick="filterByCategory('${cat}', this)">${cat}</div>
             `).join('');
+        }
+
+        function renderFeatured() {
+            const featuredSlider = document.getElementById('featuredSlider');
+            // apps.json içinde "featured": true olan uygulamayı bul
+            const featuredAppIndex = allApps.findIndex(app => app.featured === true);
+
+            if (featuredAppIndex !== -1) {
+                const app = allApps[featuredAppIndex];
+                document.getElementById('featuredTitle').innerText = app.name;
+                document.getElementById('featuredDesc').innerText = app.description || `${app.category} kategorisindeki öne çıkan uygulama.`;
+                document.getElementById('featuredBtnBtn').setAttribute('onclick', `openAppDetail(${featuredAppIndex})`);
+                featuredSlider.style.display = 'flex';
+            } else {
+                featuredSlider.style.display = 'none';
+            }
         }
 
         function renderApps(apps) {
@@ -1106,18 +1099,11 @@
             renderApps(filtered);
         }
 
-        function openFeaturedApp() {
-            if (allApps.length > 0) {
-                openAppDetail(0);
-            }
-        }
-
-        // --- UYGULAMA DETAY VE EKRAN GÖRÜNTÜLERİ MODALI ---
+        // UYGULAMA DETAY VE EKRAN GÖRÜNTÜLERİ MODALI
         function openAppDetail(index) {
             const app = allApps[index];
             if (!app) return;
 
-            // Ekran görüntüleri dizisi varsa HTML oluştur
             let screenshotsHtml = '';
             if (app.screenshots && app.screenshots.length > 0) {
                 screenshotsHtml = `
@@ -1167,71 +1153,20 @@
 
         window.onload = fetchApps;
 
-        // --- POLİTİKA MODALLARI ---
+        // POLİTİKA MODALLARI
         const modalData = {
             guvenlik: {
                 title: "Güvenliğiniz İçin Yalnızca Sitemizden İndirin!",
                 body: `Uygulamalarımızın güvenliği, bütünlüğü ve güncelliği yalnızca resmi web sitemiz <strong>Bxasaran Store</strong> tarafından garanti edilmektedir.<br><br>
-                Web sitemiz dışında (üçüncü taraf APK siteleri, forumlar, Telegram kanalları veya dosya paylaşım platformları aracılığıyla) yayımlanan hiçbir dosya <strong>tarafımıza ait değildir</strong>. Cihazınızın güvenliği için uygulamalarımızı <strong>asla başka bir kaynaktan indirmeyiniz</strong>.`
+                Web sitemiz dışında yayımlanan hiçbir dosya <strong>tarafımıza ait değildir</strong>. Cihazınızın güvenliği için uygulamalarımızı <strong>asla başka bir kaynaktan indirmeyiniz</strong>.`
             },
             gizlilik: {
                 title: "Bxasaran Store Gizlilik Politikası",
-                body: `
-                <h4>1. Gizlilik Politikası</h4>
-                <strong>Bxasaran</strong>, sunduğu tüm mobil uygulamaları ve araçları tamamen ücretsiz olarak geliştirmiştir. Bu HİZMET, Bxasaran tarafından ücretsiz olarak sağlanmakta ve olduğu gibi kullanılmak üzere tasarlanmıştır. Bu sayfa, ziyaretçileri Hizmetimizi kullanmaya karar veren herhangi biri için Kişisel Bilgilerin toplanması, kullanılması ve ifşa edilmesi ile ilgili politikalarımız hakkında bilgilendirmek için kullanılır. Servisimizi kullanmayı tercih ederseniz, bu politika ile ilgili olarak bilgi toplanması ve kullanılmasını kabul etmiş olursunuz. Bilgilerinizi bu Gizlilik Politikası'nda açıklandığı şekilde dışında kimseyle kullanmayacağız veya paylaşmayacağız.
-
-                <h4>2. Bilgi Toplama ve Kullanımı</h4>
-                Daha iyi bir deneyim için Servisimizi kullanırken, uygulama içi temel işlevleri sağlamak amacıyla üçüncü taraf servis sağlayıcılarından yararlanılabilir. Uygulamalarımız doğrudan sizden ad, soyad, adres veya ödeme bilgisi talep etmez. Kullanılan üçüncü taraf hizmet sağlayıcıları şunlar olabilir:
-                <ul>
-                    <li>Google Play Hizmetleri</li>
-                    <li>Google Mobil Reklamlar (AdMob)</li>
-                    <li>Firebase Analitik ve Çökme Raporları</li>
-                </ul>
-
-                <h4>3. Günlük (Log) Verileri</h4>
-                Servisimizi kullandığınız zaman, uygulamada teknik bir hata oluştuğunda cihazınızda 'Log Verisi' adı altında teknik analiz verilerinin (üçüncü parti hata takip ürünleri aracılığıyla) toplanabileceğini bilmenizi isteriz. Bu Günlük Verileri; cihazınızın İnternet Protokolü ("IP") adresi, cihaz modeli, Android işletim sistemi sürümü, uygulama yapılandırması, kullanım zamanı ve tarihi gibi yalnızca hata ayıklamaya yönelik istatistikleri içerebilir. Ayrıca kötüye kullanımı ve modifikasyon girişimlerini önlemek amacıyla uygulama bütünlük doğrulamaları kullanılabilir.
-
-                <h4>4. Çerezler (Cookies)</h4>
-                Çerezler, genellikle anonim benzersiz tanımlayıcılar olarak kullanılan az miktarda veri içeren dosyalardır. Bu Servis doğrudan çerez kullanmaz; ancak uygulamalarımız ve web sitemiz, reklam gösterimi veya performans iyileştirmesi için çerezleri kullanan üçüncü parti kod ve kütüphaneleri barındırabilir. Tarayıcı veya cihaz ayarlarınızdan çerezleri reddetme seçeneğine sahipsiniz.
-
-                <h4>5. Servis Sağlayıcıları</h4>
-                Hizmetimizi kolaylaştırmak, uygulama performansını analiz etmek veya standart reklam gösterimlerini sağlamak amacıyla güvenilir üçüncü parti altyapılarla çalışabiliriz. Bu servis sağlayıcıları yalnızca kendilerine verilen teknik görevleri yerine getirmek amacıyla anonim verilere erişebilir ve bilgileri başka bir amaçla kullanmamakla yükümlüdür.
-
-                <h4>6. Güvenlik</h4>
-                Kullanıcılarımızın güvenliğine büyük önem veriyoruz ve uygulamalarımızı yalnızca resmi web sitemiz <strong>bxasaran-developer.github.io</strong> üzerinden sunuyoruz. Verilerinizi korumak için ticari ve teknik olarak kabul edilebilir yöntemleri kullanmaya özen gösteriyoruz. Ancak internet üzerinden iletimin veya elektronik depolamanın hiçbir yönteminin %100 güvenli olmadığını hatırlatırız.
-
-                <h4>7. Diğer Sitelere Bağlantılar</h4>
-                Hizmetimiz veya uygulamalarımız, dış sitelere veya reklam bağlantılarına yönlendirmeler içerebilir. Üçüncü parti bir bağlantıya tıkladığınızda o siteye yönlendirilirsiniz. Bu dış siteler tarafımızca işletilmemektedir; bu nedenle ilgili sitelerin gizlilik politikalarını incelemenizi tavsiye ederiz.
-
-                <h4>8. Çocukların Gizliliği</h4>
-                Hizmetlerimiz 13 yaşın altındaki çocukları hedef almaz ve 13 yaşın altındaki bireylerden bilinçli olarak hiçbir kişisel bilgi toplamayız. Böyle bir durumun tespit edilmesi halinde ilgili kayıtlar derhal sistemlerden silinir.
-
-                <h4>9. Gizlilik Politikasındaki Değişiklikler</h4>
-                Gizlilik Politikamızı zaman zaman güncelleyebiliriz. Değişiklikler bu sayfada yayınlandığı andan itibaren geçerli olur. Bu politika en son <strong>2026</strong> yılı itibarıyla güncellenmiştir.
-
-                <h4>10. Takip ve Cihaz Teknik Veri Açıklaması</h4>
-                Uygulamalarımız, yalnızca Android cihazlarda uyumluluğu, kararlılığı ve genel kullanıcı deneyimini iyileştirmek için cihazınızın üreticisi, modeli, işletim sistemi sürümü, CPU mimarisi ve ekran özellikleri gibi kişisel olmayan sınırlı teknik bilgileri işleyebilir. Bu veriler hiçbir şekilde ad, e-posta, telefon numarası veya kesin konum bilgisi içermez ve kullanıcı profilleme amacıyla satılmaz.
-
-                <h4>11. Gizlilik Haklarınız</h4>
-                Kullanıcılarımız; kendileriyle ilgili işlenen teknik veriler hakkında bilgi alma, hatalı verilerin düzeltilmesini isteme, verilerin silinmesini talep etme ve kişiselleştirilmiş reklam izlemesine itiraz etme haklarına sahiptir.
-
-                <h4>12. Veri Saklama Politikası</h4>
-                Hizmetlerimizi sunmak ve teknik hataları gidermek için gereken süre boyunca anonim analiz verileri tutulur. İhtiyaç kalmadığında tüm teknik kayıtlar otomatik olarak anonimleştirilir veya silinir.
-
-                <h4>13. Takipten Vazgeçme (Opt-Out)</h4>
-                Reklam kişiselleştirme tercihlerinizi doğrudan cihaz ayarlarınızdan yönetebilirsiniz: Android cihazınızda <strong>Ayarlar > Google > Reklamlar</strong> bölümüne giderek <em>"Reklam Kişiselleştirmeyi Devre Dışı Bırak"</em> seçeneğini etkinleştirebilirsiniz.
-
-                <h4>14. Ücretsiz Hizmet ve Ücret Politikası</h4>
-                <strong>Bxasaran Store</strong> bünyesindeki hiçbir uygulamada kullanıcılarımızdan para, bağış, abonelik ücreti veya uygulama içi satın alma talep edilmez. Tüm uygulamalarımız tamamen ücretsizdir ve tek gelir kaynağımız uygulama içi reklamlardır. Bu nedenle herhangi bir ödeme veya para iadesi süreci bulunmamaktadır. Adımıza sizden ücret talep eden kişi veya kaynaklara kesinlikle itibar etmeyiniz.
-
-                <h4>15. Bize Ulaşın</h4>
-                Gizlilik Politikamız, uygulamalarımız veya güvenliğiniz hakkında herhangi bir sorunuz ya da öneriniz varsa, resmi web sitemiz <strong>bxasaran-developer.github.io/Web-Store/</strong> üzerindeki resmi kanallarımız aracılığıyla bizimle her zaman iletişime geçebilirsiniz.`
+                body: `<strong>Bxasaran Store</strong>, kullanıcı gizliliğine önem verir. Uygulamalarımız kişisel verilerinizi toplamaz.`
             },
             hakkimizda: {
                 title: "Hakkımızda & Gelir Politikamız",
-                body: `<strong>Bxasaran Store</strong> olarak geliştirdiğimiz ve düzenlediğimiz tüm uygulamalar tamamen <strong>ücretsizdir</strong>.<br><br>
-                Kullanıcılarımızdan hiçbir şekilde <strong>para, bağış, abonelik ücreti veya maddi destek</strong> talep edilmemektedir. Adımıza veya uygulamalarımız üzerinden sizden para isteyen hiçbir kişi, kurum veya siteye itibar etmeyiniz.<br><br>
-                Uygulamalarımızın geliştirme, bakım ve sunucu maliyetlerini karşılayabilmek adına tek gelir kaynağımız <strong>uygulama içi reklamlardır</strong>. Sizlerden herhangi bir ödeme veya bağış talep edilmez; yalnızca projelerimizi sürdürebilmemizi sağlayan standart reklam gösterimleri mevcuttur.`
+                body: `<strong>Bxasaran Store</strong> bünyesindeki tüm uygulamalar tamamen <strong>ücretsizdir</strong>. Tek gelir kaynağımız uygulama içi reklamlardır.`
             }
         };
 
