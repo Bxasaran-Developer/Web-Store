@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* --- 1. EKRAN: AKICI NEON SPLASH & POLİTİKALAR --- */
+        /* --- 1. EKRAN: SPLASH & POLİTİKALAR --- */
         #splashScreen {
             position: fixed;
             inset: 0;
@@ -42,12 +42,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 36px 18px 28px;
+            padding: 40px 18px 30px;
             overflow: hidden;
             transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
         }
 
-        /* Akıcı Neon Arka Plan Hareketi */
         #splashScreen::before,
         #splashScreen::after {
             content: '';
@@ -115,7 +114,6 @@
             line-height: 1.45;
         }
 
-        /* Orta Kısım: Neon Politika Kartları (Logosuz) */
         .splash-nav {
             display: flex;
             flex-direction: column;
@@ -186,38 +184,50 @@
             width: 100%;
         }
 
-        .more-btn {
-            background: linear-gradient(135deg, #9333ea, #c084fc);
-            border: none;
-            color: #09090b;
-            padding: 13px 36px;
+        /* Tıklanamayan şık bilgilendirme butonu */
+        .info-pill-static {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(192, 132, 252, 0.25));
+            border: 1px solid rgba(192, 132, 252, 0.4);
+            color: #e9d5ff;
+            padding: 12px 28px;
             border-radius: 16px;
             font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 0.92rem;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 0 24px rgba(168, 85, 247, 0.45);
-        }
-
-        .more-btn:active {
-            transform: scale(0.96);
+            font-weight: 600;
+            font-size: 0.88rem;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+            cursor: default;
         }
 
         .swipe-hint {
-            font-size: 0.72rem;
-            color: #71717a;
+            font-size: 0.75rem;
+            color: #a1a1aa;
             letter-spacing: 0.4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        /* --- 2. EKRAN: SADECE SEARCH, UYGULAMALAR VE ÖZEL TUTAMAÇ --- */
+        .swipe-hint svg {
+            width: 14px;
+            height: 14px;
+            stroke: #c084fc;
+            animation: bounceUp 1.8s infinite;
+        }
+
+        @keyframes bounceUp {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-4px); }
+            60% { transform: translateY(-2px); }
+        }
+
+        /* --- 2. EKRAN: MAĞAZA (EN ÜSTTEN BAŞLAYAN BAĞIMSIZ YAPI) --- */
         .main-wrapper {
             width: 100%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 14px 16px 40px;
+            padding: 16px 16px 40px;
             background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.14), transparent 50%);
         }
 
@@ -226,25 +236,25 @@
             max-width: 480px;
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
         }
 
-        /* Üstteki Sadece Tutulup Aşağı Çekilebilen > Butonu */
+        /* Sabit ve Arama Çubuğunun Üstünde Kalan Şık Neon Tutamaç */
         .pull-handle-zone {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 4px 0 6px;
+            padding: 2px 0 8px;
         }
 
         .pull-btn {
             --pull-progress: 0;
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background: rgba(20, 20, 26, 0.9);
-            border: 2px solid rgba(192, 132, 252, calc(0.25 + var(--pull-progress) * 0.75));
+            background: rgba(18, 18, 24, 0.95);
+            border: 2px solid rgba(192, 132, 252, calc(0.3 + var(--pull-progress) * 0.7));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -253,8 +263,8 @@
             user-select: none;
             position: relative;
             box-shadow: 
-                0 0 calc(var(--pull-progress) * 28px) rgba(168, 85, 247, calc(0.2 + var(--pull-progress) * 0.8)),
-                inset 0 0 calc(var(--pull-progress) * 18px) rgba(168, 85, 247, calc(var(--pull-progress) * 0.85));
+                0 0 calc(var(--pull-progress) * 32px + 8px) rgba(168, 85, 247, calc(0.3 + var(--pull-progress) * 0.7)),
+                inset 0 0 calc(var(--pull-progress) * 16px) rgba(192, 132, 252, 0.6);
             transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s ease;
         }
 
@@ -263,27 +273,28 @@
             cursor: grabbing;
         }
 
-        /* Çektikçe Etrafını Kaplayan Mor Dairesel Halka */
+        /* Çektikçe Etrafını Kaplayan Canlı Neon Mor Dairesel Halka */
         .pull-btn::before {
             content: '';
             position: absolute;
-            inset: -5px;
+            inset: -6px;
             border-radius: 50%;
             background: conic-gradient(
-                #a855f7 calc(var(--pull-progress) * 360deg),
+                #e879f9 calc(var(--pull-progress) * 360deg),
                 transparent 0deg
             );
-            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), #fff calc(100% - 3px));
-            mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), #fff calc(100% - 3px));
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff calc(100% - 3.5px));
+            mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff calc(100% - 3.5px));
             pointer-events: none;
+            filter: drop-shadow(0 0 8px #c084fc);
         }
 
         .pull-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             stroke: #e9d5ff;
-            transform: rotate(90deg); /* > ikonunu aşağı yönlü ok yapar */
-            transition: transform 0.2s ease;
+            transform: rotate(90deg); /* Aşağı yönlü ok */
+            filter: drop-shadow(0 0 4px rgba(233, 213, 255, 0.6));
         }
 
         .search-container {
@@ -435,7 +446,7 @@
             padding: 28px 0;
         }
 
-        /* --- ANİMASYONLU MODAL PENCERE (SPLASH ÜSTÜNDE) --- */
+        /* --- MODAL PENCERE --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -524,7 +535,7 @@
 </head>
 <body>
 
-    <!-- 1. GÖRSEL: AKICI NEON SPLASH & POLİTİKA MENÜSÜ -->
+    <!-- 1. EKRAN: SPLASH & POLİTİKALAR -->
     <div id="splashScreen">
         <div class="splash-header">
             <div class="brand-neon-title">Bxasaran Store</div>
@@ -573,15 +584,20 @@
         </div>
 
         <div class="splash-bottom">
-            <button class="more-btn" onclick="enterStore()">Uygulamaları Gör</button>
-            <span class="swipe-hint">veya mağaza için yukarı kaydırın</span>
+            <div class="info-pill-static">Uygulamalar için yukarı kaydırın</div>
+            <div class="swipe-hint">
+                <span>Mağazayı açmak için ekranı yukarı kaydırın</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </div>
         </div>
     </div>
 
-    <!-- 2. GÖRSEL: SADECE TUTAMAÇ BUTON, SEARCH VE UYGULAMALAR -->
-    <div class="main-wrapper">
+    <!-- 2. EKRAN: MAĞAZA (EN ÜSTTEN BAŞLAYAN BAĞIMSIZ YAPI) -->
+    <div class="main-wrapper" id="storeMainWrapper">
         <div class="container">
-            <!-- Sadece bu > butonu tutulup aşağı çekildiğinde mor dolar ve 1. ekrana döner -->
+            <!-- Sabit Üst Çekmece (Geri Dönüş) Butonu -->
             <div class="pull-handle-zone">
                 <div class="pull-btn" id="pullHandleBtn" title="Menüye dönmek için aşağı çekin">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -609,7 +625,7 @@
         </div>
     </div>
 
-    <!-- POLİTİKA MODAL PENCERESİ -->
+    <!-- MODAL PENCERE -->
     <div class="modal-overlay" id="infoModal" onclick="closeModalOnBg(event)">
         <div class="modal-box">
             <h3 class="modal-title" id="modalTitle">Başlık</h3>
@@ -624,13 +640,15 @@
 
         function enterStore() {
             splash.classList.add('slide-up');
+            window.scrollTo({ top: 0, behavior: 'instant' }); // Mağazayı en üstten başlat
         }
 
         function returnToSplash() {
             splash.classList.remove('slide-up');
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
-        // 1. Ekranda yukarı kaydırma (Swipe Up) ile mağazayı açma
+        // 1. Ekranda yukarı kaydırma ile mağazayı açma
         let splashTouchStartY = 0;
         splash.addEventListener('touchstart', e => {
             splashTouchStartY = e.changedTouches[0].screenY;
@@ -638,15 +656,15 @@
 
         splash.addEventListener('touchend', e => {
             const splashTouchEndY = e.changedTouches[0].screenY;
-            if (splashTouchEndY < splashTouchStartY - 55) {
+            if (splashTouchEndY < splashTouchStartY - 50) {
                 enterStore();
             }
         }, { passive: true });
 
-        // 2. Ekranda SADECE > butonunu tutup aşağı çekince mor dolma ve 1. menüye dönme
+        // 2. Ekranda SADECE pullBtn'i tutup aşağı çekince 1. ekrana dönme
         let isPulling = false;
         let pullStartY = 0;
-        const maxPullDistance = 120; // Tam dolum için gereken piksel mesafesi
+        const maxPullDistance = 110;
 
         function startPull(clientY) {
             isPulling = true;
@@ -658,10 +676,10 @@
             if (!isPulling) return;
             const deltaY = Math.max(0, clientY - pullStartY);
             const progress = Math.min(1, deltaY / maxPullDistance);
-            const visualTranslate = Math.min(deltaY * 0.55, 70);
+            const visualTranslate = Math.min(deltaY * 0.5, 60);
 
             pullBtn.style.setProperty('--pull-progress', progress.toFixed(3));
-            pullBtn.style.transform = `translateY(${visualTranslate}px) scale(${1 + progress * 0.12})`;
+            pullBtn.style.transform = `translateY(${visualTranslate}px) scale(${1 + progress * 0.15})`;
         }
 
         function endPull(clientY) {
@@ -672,17 +690,14 @@
             const deltaY = Math.max(0, clientY - pullStartY);
             const progress = Math.min(1, deltaY / maxPullDistance);
 
-            // Butonu eski yerine yumuşakça sıfırla
             pullBtn.style.setProperty('--pull-progress', '0');
             pullBtn.style.transform = 'translateY(0) scale(1)';
 
-            // Yeterince çekildiyse 1. görseldeki menüye geri dön
-            if (progress >= 0.85) {
+            if (progress >= 0.8) {
                 returnToSplash();
             }
         }
 
-        // Dokunmatik (Mobil) olayları - sadece pullBtn üzerinde aktif
         pullBtn.addEventListener('touchstart', e => {
             e.stopPropagation();
             startPull(e.touches[0].clientY);
@@ -700,7 +715,6 @@
             }
         });
 
-        // Fare (Bilgisayar) desteği - sadece pullBtn üzerinde aktif
         pullBtn.addEventListener('mousedown', e => {
             e.preventDefault();
             startPull(e.clientY);
@@ -718,7 +732,7 @@
             }
         });
 
-        // --- UYGULAMALARI YÜKLEME VE ARAMA ---
+        // --- UYGULAMALAR ---
         let allApps = [];
 
         async function fetchApps() {
